@@ -1,16 +1,14 @@
 package com.project.Recommendation_Based.Telemedicine.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+@Controller
 @RestController
-@RequestMapping("/user")
-public class UserController {
-	
-	@GetMapping("/")
-	public String welcome() {
-		return "Welcome to user controller";
-	}
-
+public class HomeController {
+    @RequestMapping("/")
+    public String hello(){
+        return "program Start successfully";
+    }
 }

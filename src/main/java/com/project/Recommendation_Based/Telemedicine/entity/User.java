@@ -1,69 +1,67 @@
 package com.project.Recommendation_Based.Telemedicine.entity;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
-import jakarta.persistence.*;
-import org.springframework.stereotype.Component;
-
-
-import java.util.List;
 
 @Entity
-@Table(name = "users")
-@Component
+@Table(name = "\"user\"")
 public class User {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "user_id")
-	private long id;
+	private int id;
 
-	@Column(name = "fullname")
-	private String fullname;
+	private String name;
 
-	@Column(name = "username", unique = true)
-	private String username;
 
-	@Column(name = "password")
+	private String email;
+
 	private String password;
 
-	@ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
-	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
-	private List<Role> roles;
+	private String role;
 
-	public User() {
-
-	}
-
-	public User(long id, String fullname, String username, String password, List<Role> roles) {
-		this.id = id;
-		this.fullname = fullname;
-		this.username = username;
-		this.password = password;
-		this.roles = roles;
-	}
-
-	public long getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
+	public void setId(int id) {
 		this.id = id;
 	}
 
-	public String getFullname() {
-		return fullname;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setFullname(String fullname) {
-		this.fullname = fullname;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
-	public String getUsername() {
-		return username;
+	public String getName() {
+		return name;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setName(String name) {
+		this.name = name;
 	}
+
+//	public String getMobileNo() {
+//		return mobileNo;
+//	}
+//
+//	public void setMobileNo(String mobileNo) {
+//		this.mobileNo = mobileNo;
+//	}
 
 	public String getPassword() {
 		return password;
@@ -73,12 +71,9 @@ public class User {
 		this.password = password;
 	}
 
-	public List<Role> getRoles() {
-		return roles;
-	}
-
-	public void setRoles(List<Role> roles) {
-		this.roles = roles;
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", name=" + name + ", password=" + password + "]";
 	}
 
 }
