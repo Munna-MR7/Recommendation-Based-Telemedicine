@@ -1,4 +1,4 @@
-package com.project.Recommendation_Based.Telemedicine.entity;
+package com.project.Recommendation_Based.Telemedicine.dto;
 
 import lombok.*;
 
