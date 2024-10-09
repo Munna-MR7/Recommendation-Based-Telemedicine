@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -23,6 +25,10 @@ public class Doctor {
     private String email;
     private String designation;
     private String consultationFee;
+    private String specialty;
+
+    @ManyToMany(mappedBy = "assignedDoctors")
+    private List<User> patients;
 
 
 

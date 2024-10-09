@@ -28,7 +28,14 @@ public class Appointment {
     private String appointmentDate;
     private String appointmentTime;
     private String consultationFee;
+    private String paymentStatus;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
+    @ManyToOne
+    @JoinColumn(name = "doctor_id")
+    private Doctor doctor;
 
 }
