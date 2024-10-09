@@ -14,6 +14,10 @@ public interface UserService {
 
     void saveStudent(UserDTO user);
 
+    public User getUserProfile(String email);
+
+    User findByEmail(String email);
+
     //public void insertuserDataFromCSV(MultipartFile file) throws IOException, CsvValidationException, NumberFormatException;
 
 }

@@ -11,19 +11,16 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "Doctors")
-public class Doctor {
+public class Prescription {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String name;
-    private String role;
-    private String degrees;
-    private String password;
-    private String email;
-    private String designation;
-    private String consultationFee;
 
+    private String medicineSummary;
+    private String date;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
 }

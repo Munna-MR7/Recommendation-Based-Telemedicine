@@ -1,9 +1,5 @@
 package com.project.Recommendation_Based.Telemedicine.service;
 
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
-
 import com.project.Recommendation_Based.Telemedicine.dto.UserDTO;
 import com.project.Recommendation_Based.Telemedicine.entity.User;
 import com.project.Recommendation_Based.Telemedicine.repository.UserRepo;
@@ -12,7 +8,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-import org.springframework.web.multipart.MultipartFile;
 
 //import com.opencsv.CSVReader;
 //import com.opencsv.exceptions.CsvValidationException;
@@ -85,28 +80,10 @@ public class UserServiceImpl implements UserService {
 
     }
 
-//    @Override
-//    public void insertuserDataFromCSV(MultipartFile file) throws IOException, CsvValidationException, NumberFormatException {
-//        CSVReader reader = new CSVReader(new InputStreamReader(file.getInputStream(), StandardCharsets.UTF_8));
-//        String[] nextLine;
-//        boolean isFirstRow = true; // Flag to identify the first row
-//
-//        while ((nextLine = reader.readNext()) != null) {
-//            if (isFirstRow) {
-//                isFirstRow = false; // Skip the first row
-//                continue;
-//            }
-//
-//            User user = new User();
-//            user.setName(nextLine[0]);
-//            user.setEmail(nextLine[1]);
-//            String password = passwordEncoder.encode(nextLine[2]);
-//            user.setPassword(password);
-//            user.setRole("ROLE_USER");
-//            userRepo.save(user);
-//        }
-//        reader.close(); // Close the CSV reader
-//
+    @Override
+    public User getUserProfile(String email) {
+        return userRepo.findByEmail(email);
+    }
 
 
 }
