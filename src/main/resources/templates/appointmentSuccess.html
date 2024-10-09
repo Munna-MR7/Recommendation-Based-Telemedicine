@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"  th:replace="~{base::layout(~{::section})}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Appointment Success</title>
+</head>
+<body>
+    <section>
+        <div class="container mt-5">
+            <div class="card">
+                <div class="card-header text-center">
+                    <h2>Appointment Confirmation</h2>
+                </div>
+                <div class="card-body">
+                    <p class="lead text-center">Thank you, <strong th:text="${appointment.patientName}">[User's Name]</strong>!</p>
+                    <p class="text-center">Your appointment has been successfully scheduled.</p>
+
+                    <h4 class="text-center mt-4">Appointment Details</h4>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Doctor Name: <strong th:text="${appointment.doctorName}">[Doctor Name]</strong></li>
+                        <li class="list-group-item">Appointment Date: <strong th:text="${appointment.appointmentDate}">[Appointment Date]</strong></li>
+                        <li class="list-group-item">Appointment Time: <strong th:text="${appointment.appointmentTime}">[Appointment Time]</strong></li>
+
+                    </ul>
+
+                    <!-- Payment Section -->
+                    <div class="text-center mt-5">
+                        <h4>Payment Options</h4>
+                        <p>Please choose an option for your consultation fee.</p>
+                        <p>Consultation Fee: <strong th:text="${appointment.consultationFee}">[Consultation Fee]</strong></p>
+                        <div class="btn-group mt-3" role="group">
+                            <button type="button" class="btn btn-success">Pay Now</button>
+                            <button type="button" class="btn btn-secondary">Pay Later</button>
+                        </div>
+                    </div>
+
+                    <!-- Download Section -->
+                    <div class="text-center mt-5">
+                        <h4>Download Your Appointment</h4>
+                        <p>You can download a copy of your appointment for your records.</p>
+                        <a th:href="@{/appointment/download/{id}(id=${appointment.id})}" class="btn btn-primary">
+                            Download Appointment Copy
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+</body>
+</html>
+
