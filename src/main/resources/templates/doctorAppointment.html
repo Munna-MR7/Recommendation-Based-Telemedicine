@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"  th:replace="~{base::layout(~{::section})}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Doctor Appointment</title>
+</head>
+<body>
+  <section>
+
+    <div class="container mt-5">
+      <h2 class="text-center mb-4">Book an Appointment</h2>
+
+      <form action="makeAppointment" method="post">
+
+        <!-- Personal Information Section -->
+        <div class="card mb-4">
+          <div class="card-header">Personal Information</div>
+          <div class="card-body">
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <label for="fullName" class="form-label">Full Name</label>
+                <input type="text" class="form-control" id="fullName" name="patientName"  placeholder="Enter your full name" required>
+              </div>
+              <div class="col-md-6">
+                <label for="email" class="form-label">Email Address</label>
+                <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" >
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <label for="phone" class="form-label">Phone Number</label>
+                <input type="text" class="form-control" id="phone" name="phoneNumber" placeholder="Enter your phone number" required>
+              </div>
+              <div class="col-md-3">
+                <label for="age" class="form-label">Age</label>
+                <input type="number" class="form-control" id="age" name="age" placeholder="Enter your age" required>
+              </div>
+              <div class="col-md-3">
+                <label for="gender" class="form-label">Gender</label>
+                <select class="form-select" id="gender" name="gender">
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="address" class="form-label">Address</label>
+              <input type="text" class="form-control" id="address" name="address" placeholder="Enter your address">
+            </div>
+          </div>
+        </div>
+
+        <!-- Health Information Section -->
+        <div class="card mb-4">
+          <div class="card-header">Health Information</div>
+          <div class="card-body">
+  <!--          <div class="mb-3">-->
+  <!--            <label class="form-label">Select Your Symptoms</label>-->
+  <!--            <div class="form-check">-->
+  <!--              <input class="form-check-input" type="checkbox" th:field="*{symptoms}" value="Fever" id="symptom1">-->
+  <!--              <label class="form-check-label" for="symptom1">Fever</label>-->
+  <!--            </div>-->
+  <!--            <div class="form-check">-->
+  <!--              <input class="form-check-input" type="checkbox" th:field="*{symptoms}" value="Cough" id="symptom2">-->
+  <!--              <label class="form-check-label" for="symptom2">Cough</label>-->
+  <!--            </div>-->
+  <!--            <div class="form-check">-->
+  <!--              <input class="form-check-input" type="checkbox" th:field="*{symptoms}" value="Fatigue" id="symptom3">-->
+  <!--              <label class="form-check-label" for="symptom3">Fatigue</label>-->
+  <!--            </div>-->
+  <!--          </div>-->
+
+  <!--          <div class="mb-3">-->
+  <!--            <label for="description" class="form-label">Brief Description of Symptoms</label>-->
+  <!--            <textarea class="form-control" id="description" rows="3" th:field="*{description}" placeholder="Describe your symptoms"></textarea>-->
+  <!--          </div>-->
+          </div>
+
+          <div class="mb-3">
+            <label for="report" class="form-label">Upload Medical Reports (Optional)</label>
+            <input class="form-control" type="file" id="report" name="medicalReport">
+          </div>
+
+        </div>
+
+        <!-- Doctor Selection Section -->
+        <div class="card mb-4">
+          <div class="card-header">Doctor Selection</div>
+            <div class="card-body">
+
+<!--              <div class="mb-3">-->
+<!--                <label for="specialty" class="form-label">Select Specialty</label>-->
+<!--                <select class="form-select" id="specialty" th:field="*{specialty}">-->
+<!--                  <option value="General Practitioner">General Practitioner</option>-->
+<!--                  <option value="Cardiology">Cardiology</option>-->
+<!--                  <option value="Dermatology">Dermatology</option>-->
+<!--                  &lt;!&ndash; Add more specialties as needed &ndash;&gt;-->
+<!--                </select>-->
+<!--              </div>-->
+
+    <!--          <div class="mb-3">-->
+    <!--            <label for="location" class="form-label">Doctor's Location Preference</label>-->
+    <!--            <select class="form-select" id="location" th:field="*{location}">-->
+    <!--              <option value="City">City</option>-->
+    <!--              <option value="District">District</option>-->
+    <!--              &lt;!&ndash; More location options based on your data &ndash;&gt;-->
+    <!--            </select>-->
+    <!--          </div>-->
+
+    <!--          <div class="mb-3">-->
+    <!--            <label for="doctor" class="form-label">Preferred Doctor</label>-->
+    <!--            <select class="form-select" id="doctor" th:field="*{preferredDoctor}">-->
+    <!--              <option th:each="doctor : ${recommendedDoctors}" th:value="${doctor.id}" th:text="${doctor.name}"></option>-->
+    <!--            </select>-->
+    <!--          </div>-->
+
+              <div class="row mb-3 d-flex">
+                <p th:text="${doctor.name}" class=" fw-bold"></p>
+                <p th:text="${doctor.designation}" class=" text-primary"></p>
+                <input type="hidden" name="doctorName" th:value="${doctor.name}"/>
+
+                <input type="hidden" name="consultationFee" th:value="${doctor.consultationFee}"/>
+
+
+              </div>
+              <div class="row mb-3">
+                <div class="col-md-6">
+                  <label for="appointmentDate" class="form-label">Appointment Date</label>
+                  <input type="date" class="form-control" id="appointmentDate" name="appointmentDate" required>
+                </div>
+                <div class="col-md-6">
+                  <label for="appointmentTime" class="form-label">Preferred Time</label>
+                  <select class="form-select" id="appointmentTime" name="appointmentTime">
+                    <option value="Morning">Morning</option>
+                    <option value="Afternoon">Afternoon</option>
+                    <option value="Evening">Evening</option>
+                    <option value="Night">Night</option>
+                  </select>
+                </div>
+              </div>
+
+    <!--          <div class="mb-3">-->
+    <!--            <label for="consultationMode" class="form-label">Consultation Mode</label>-->
+    <!--            <select class="form-select" id="consultationMode" th:field="*{consultationMode}">-->
+    <!--              <option value="Online">Online</option>-->
+    <!--              <option value="Offline">Offline</option>-->
+    <!--            </select>-->
+    <!--          </div>-->
+            </div>
+        </div>
+
+        <!-- Payment Information Section -->
+<!--        <div class="card mb-4">-->
+<!--          <div class="card-header">Payment Information</div>-->
+<!--          <div class="card-body">-->
+<!--            <div class="mb-3">-->
+<!--              <label for="consultationFee" class="form-label">Consultation Fee</label>-->
+<!--              <input type="text" class="form-control" id="consultationFee" th:field="*{consultationFee}" readonly>-->
+<!--            </div>-->
+<!--  -->
+<!--            <div class="mb-3">-->
+<!--              <label for="paymentMethod" class="form-label">Payment Method</label>-->
+<!--              <select class="form-select" id="paymentMethod" th:field="*{paymentMethod}">-->
+<!--                <option value="Credit Card">Credit/Debit Card</option>-->
+<!--                <option value="Mobile Payment">Mobile Payment</option>-->
+<!--                <option value="Insurance">Insurance</option>-->
+<!--              </select>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+
+        <!-- Submit Button -->
+        <div class="text-center pb-5">
+          <button type="submit" class="btn btn-primary ">Submit Appointment</button>
+        </div>
+      </form>
+    </div>
+
+  </section>
+
+
+
+</body>
+</html>

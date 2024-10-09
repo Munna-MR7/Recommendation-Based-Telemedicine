@@ -28,7 +28,11 @@
                         <a class="nav-link" href="#">Services</a>
                     </li>
                     <li class="nav-item pe-5">
+<<<<<<< HEAD
                         <a class="nav-link" href="#">Products</a>
+=======
+                        <a class="nav-link" href="allDoctor">Doctors</a>
+>>>>>>> 4f1b50b (Appointment form created and download appointment reciept)
                     </li>
                     <li class="nav-item pe-5">
                         <a class="nav-link" href="#">Brands</a>
@@ -37,6 +41,7 @@
                         <a class="nav-link" href="#">About</a>
                     </li>
                     <th:block th:if="${user==NULL}">
+<<<<<<< HEAD
 <!--                        <li class="nav-item pe-5"><a class="nav-link" href="register">Register</a></li>-->
                         <li class="nav-item pe-5"><a class="nav-link" href="signin">Login</a></li>
                     </th:block>
@@ -44,12 +49,17 @@
                         <!--                        <li class="nav-item pe-5"><a class="nav-link" href="register">Register</a></li>-->
                         <li class="nav-item pe-5"><a class="nav-link" href="logout">Logout</a></li>
                     </th:block>
+=======
+                        <li class="nav-item pe-5"><a class="nav-link" href="signin">Login</a></li>
+                    </th:block>
+>>>>>>> 4f1b50b (Appointment form created and download appointment reciept)
 
                 </ul>
 
 
             </div>
             <div>
+<<<<<<< HEAD
                 <form action="register" method="get">
 <!--                    <th:block th:if="${user==NULL}">-->
                         <button class="btn btn-outline-primary fw-bold py-2 px-4">Register</button>
@@ -58,6 +68,23 @@
 <!--                    </th:block>-->
 
                 </form>
+=======
+                <th:block th:if="${user==NULL}">
+                    <form action="register" method="get">
+                            <button class="btn btn-outline-primary fw-bold py-2 px-4">Register</button>
+                    </form>
+                </th:block>
+                <th:block th:if="${user}">
+                   <div class="d-flex">
+                       <form action="Profile" method="get">
+                           <button class="btn btn-outline-primary fw-bold py-2 px-4">Profile</button>
+                       </form>
+                       <form th:action="@{/userLogout}" method="POST">
+                           <button class="btn btn-outline-primary fw-bold py-2 px-4">Logout</button>
+                       </form>
+                   </div>
+                </th:block>
+>>>>>>> 4f1b50b (Appointment form created and download appointment reciept)
             </div>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -96,8 +123,13 @@
         crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 
+<<<<<<< HEAD
 <script src="/js/register.js">
 
 </script>
+=======
+<script src="/js/register.js"></script>
+<script src="/js/doctorListsToAppointmentForm.js"></script>
+>>>>>>> 4f1b50b (Appointment form created and download appointment reciept)
 </body>
 </html>

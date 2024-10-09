@@ -11,21 +11,23 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "Doctors")
-public class Doctor {
+@Table(name = "Appointments")
+public class Appointment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String name;
-    private String role;
-    private String degrees;
-    private String password;
+    private String patientName;
     private String email;
-    private String designation;
-<<<<<<< HEAD
-=======
+    private String phoneNumber;
+    private String age;
+
+    private String gender;
+    private String address;
+    private String MedicalReport;
+    private String doctorName;
+    private String appointmentDate;
+    private String appointmentTime;
     private String consultationFee;
->>>>>>> 4f1b50b (Appointment form created and download appointment reciept)
 
 
 

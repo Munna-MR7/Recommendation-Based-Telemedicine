@@ -58,6 +58,11 @@ public class HomeController {
 
     @GetMapping("/signin")
     public String login() { return "login";}
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 4f1b50b (Appointment form created and download appointment reciept)
     @GetMapping("/admin/home")
     public String homeAd(){
         return "home";
@@ -66,6 +71,10 @@ public class HomeController {
     public String homeUser(){
         return "home";
     }
+<<<<<<< HEAD
+=======
+//    @GetMapping("/doctorLists")
+>>>>>>> 4f1b50b (Appointment form created and download appointment reciept)
 
     /*
      * @GetMapping("/user/profile") public String profile(Principal p, Model m) {
@@ -79,7 +88,11 @@ public class HomeController {
     @ResponseBody
     public String saveUser(@ModelAttribute User user, HttpSession session, Model m) {
 
+<<<<<<< HEAD
         // System.out.println(user);
+=======
+         System.out.println(user);
+>>>>>>> 4f1b50b (Appointment form created and download appointment reciept)
 
         User u = userService.saveUser(user);
 
@@ -105,6 +118,7 @@ public class HomeController {
 
     }
 
+<<<<<<< HEAD
     @GetMapping("/allDoctors")
     public String allDoctor(){
 
@@ -116,6 +130,17 @@ public class HomeController {
     public List<Doctor> getDoctor() {
         return (List<Doctor>) doctorService.getDoctors();
     }
+=======
+
+//    @Autowired
+//    private DoctorService doctorService;
+//    @GetMapping("/user/doctorLists")
+//    public List<Doctor> getDoctor() {
+//        return (List<Doctor>) doctorService.getDoctors();
+//    }
+
+
+>>>>>>> 4f1b50b (Appointment form created and download appointment reciept)
 
 //    @GetMapping("/student/{id}")
 //    public Optional<Doctor> getStudent(@PathVariable("id") int id) {

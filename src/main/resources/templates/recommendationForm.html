@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"  th:replace="~{base::layout(~{::section})}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recommendation Based telemedicine</title>
+    <link rel="stylesheet" href="	https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/6d22a805e6.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+<section class="mainbody ">
+
+    <div class="container mt-5">
+        <h2>Health Survey Form</h2>
+        <form th:action="@{/submitSurvey}" method="post">
+
+            <div class="form-group">
+                <label>1. Have you experienced any pain recently?</label><br>
+                <input type="radio" name="pain" value="Yes"> Yes<br>
+                <input type="radio" name="pain" value="No"> No<br>
+                <input type="text" name="painDetails" placeholder="If yes, please specify:" class="form-control mt-2" />
+            </div>
+
+            <div class="form-group">
+                <label>2. How often do you feel fatigued?</label>
+                <select name="fatigue" class="form-control">
+                    <option value="Never">Never</option>
+                    <option value="Occasionally">Occasionally</option>
+                    <option value="Often">Often</option>
+                    <option value="Always">Always</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>3. Have you experienced nausea?</label><br>
+                <input type="radio" name="nausea" value="Yes"> Yes<br>
+                <input type="radio" name="nausea" value="No"> No<br>
+                <select name="nauseaFrequency" class="form-control mt-2">
+                    <option value="Rarely">Rarely</option>
+                    <option value="Occasionally">Occasionally</option>
+                    <option value="Frequently">Frequently</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>4. Do you experience dizziness or lightheadedness?</label><br>
+                <input type="radio" name="dizziness" value="Yes"> Yes<br>
+                <input type="radio" name="dizziness" value="No"> No<br>
+                <select name="dizzinessFrequency" class="form-control mt-2">
+                    <option value="Rarely">Rarely</option>
+                    <option value="Occasionally">Occasionally</option>
+                    <option value="Often">Often</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>5. Have you had a persistent cough?</label><br>
+                <input type="radio" name="cough" value="Yes"> Yes<br>
+                <input type="radio" name="cough" value="No"> No<br>
+                <select name="coughDuration" class="form-control mt-2">
+                    <option value="Less than a week">Less than a week</option>
+                    <option value="1-2 weeks">1-2 weeks</option>
+                    <option value="More than 2 weeks">More than 2 weeks</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>6. Have you experienced fever?</label><br>
+                <input type="radio" name="fever" value="Yes"> Yes<br>
+                <input type="radio" name="fever" value="No"> No<br>
+                <input type="text" name="feverTemperature" placeholder="What was your highest temperature?" class="form-control mt-2" />
+            </div>
+
+            <div class="form-group">
+                <label>7. Do you have shortness of breath?</label><br>
+                <input type="radio" name="shortnessOfBreath" value="Yes"> Yes<br>
+                <input type="radio" name="shortnessOfBreath" value="No"> No<br>
+                <select name="shortnessOfBreathFrequency" class="form-control mt-2">
+                    <option value="Rarely">Rarely</option>
+                    <option value="Occasionally">Occasionally</option>
+                    <option value="Often">Often</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>8. Have you had any digestive issues?</label><br>
+                <input type="radio" name="digestiveIssues" value="Yes"> Yes<br>
+                <input type="radio" name="digestiveIssues" value="No"> No<br>
+                <input type="text" name="digestiveIssuesDetails" placeholder="If yes, please specify:" class="form-control mt-2" />
+            </div>
+
+            <div class="form-group">
+                <label>9. Have you noticed any changes in your skin?</label><br>
+                <input type="radio" name="skinChanges" value="Yes"> Yes<br>
+                <input type="radio" name="skinChanges" value="No"> No<br>
+                <input type="text" name="skinChangesDetails" placeholder="If yes, please describe:" class="form-control mt-2" />
+            </div>
+
+            <div class="form-group">
+                <label>10. How would you rate your mood over the past few weeks?</label>
+                <select name="moodRating" class="form-control">
+                    <option value="Very Poor">Very Poor</option>
+                    <option value="Poor">Poor</option>
+                    <option value="Average">Average</option>
+                    <option value="Good">Good</option>
+                    <option value="Very Good">Very Good</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+<!--    <form>-->
+<!--        <ol>-->
+<!--            <li> Have you experienced any pain recently?</li>-->
+<!--                <ul>-->
+<!--                    <li>-->
+<!--                        <div class="form-check">-->
+<!--                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>-->
+<!--                            <label class="form-check-label" for="exampleRadios1">-->
+<!--                                Yes-->
+<!--                            </label>-->
+<!--                        </div>-->
+<!--                    </li>-->
+<!--                    <li>-->
+
+<!--                        <div class="">-->
+<!--                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">-->
+<!--                            <label class="form-check-label" for="exampleRadios2">-->
+<!--                                No-->
+<!--                            </label>-->
+<!--                        </div>-->
+<!--                    </li>-->
+<!--                </ul>-->
+
+<!--            <li> How often do you feel fatigued?</li>-->
+
+<!--            <ul>-->
+<!--                <li>-->
+<!--                    <div class="form-check">-->
+<!--                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>-->
+<!--                        <label class="form-check-label" for="exampleRadios1">-->
+<!--                            Never-->
+<!--                        </label>-->
+<!--                    </div>-->
+<!--                </li>-->
+<!--                <li>-->
+
+<!--                    <div class="">-->
+<!--                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">-->
+<!--                        <label class="form-check-label" for="exampleRadios2">-->
+<!--                            Occasionally-->
+<!--                        </label>-->
+<!--                    </div>-->
+<!--                </li>-->
+<!--                <li>-->
+
+<!--                    <div class="">-->
+<!--                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option3">-->
+<!--                        <label class="form-check-label" for="exampleRadios2">-->
+<!--                            Often-->
+<!--                        </label>-->
+<!--                    </div>-->
+<!--                </li>-->
+<!--                <li>-->
+
+<!--                    <div class="">-->
+<!--                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option4">-->
+<!--                        <label class="form-check-label" for="exampleRadios2">-->
+<!--                            Always-->
+<!--                        </label>-->
+<!--                    </div>-->
+<!--                </li>-->
+<!--            </ul>-->
+
+<!--            <li> Have you experienced nausea?</li>-->
+
+<!--            <ul>-->
+<!--                <li>-->
+<!--                    <div class="form-check">-->
+<!--                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>-->
+<!--                        <label class="form-check-label" for="exampleRadios1">-->
+<!--                            Yes-->
+<!--                        </label>-->
+<!--                    </div>-->
+<!--                </li>-->
+<!--                <li>-->
+
+<!--                    <div class="form-check">-->
+<!--                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">-->
+<!--                        <label class="form-check-label" for="exampleRadios2">-->
+<!--                            No-->
+<!--                        </label>-->
+<!--                    </div>-->
+<!--                </li>-->
+<!--                <li> If yes, how frequently?-->
+
+<!--                    <ul>-->
+<!--                        <li>-->
+<!--                            <div class="form-check">-->
+<!--                                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>-->
+<!--                                <label class="form-check-label" for="exampleRadios1">-->
+<!--                                    Rearly-->
+<!--                                </label>-->
+<!--                            </div>-->
+<!--                        </li>-->
+<!--                        <li>-->
+
+<!--                            <div class="form-check">-->
+<!--                                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">-->
+<!--                                <label class="form-check-label" for="exampleRadios2">-->
+<!--                                    Occasionally-->
+<!--                                </label>-->
+<!--                            </div>-->
+<!--                        </li>-->
+<!--                        <li>-->
+
+<!--                            <div class="form-check">-->
+<!--                                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">-->
+<!--                                <label class="form-check-label" for="exampleRadios2">-->
+<!--                                    Frequently-->
+<!--                                </label>-->
+<!--                            </div>-->
+<!--                        </li>-->
+<!--                    </ul>-->
+<!--                </li>-->
+<!--            </ul>-->
+
+<!--        </ol>-->
+
+<!--    </form>-->
+
+
+</section>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+
+
+
+</body>
+
+</html>
