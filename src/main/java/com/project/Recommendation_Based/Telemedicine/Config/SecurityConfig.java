@@ -35,32 +35,6 @@ public class SecurityConfig {
         return daoAuthenticationProvider;
     }
 
-//	@Bean
-//	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception
-//	{
-//		/*
-//		 * http.csrf().disable()
-//		 * .authorizeHttpRequests().requestMatchers("/","/register","/signin",
-//		 * "/saveUser").permitAll() .requestMatchers("/user/**").authenticated().and()
-//		 * .formLogin().loginPage("/signin").loginProcessingUrl("/userLogin")
-//		 * //.usernameParameter("email")
-//		 * .defaultSuccessUrl("/user/profile").permitAll();
-//		 */
-//		http.csrf().disable()
-//		.authorizeHttpRequests().requestMatchers("/user/**").hasRole("USER")
-//		.requestMatchers("/admin/**").hasRole("ADMIN")
-//		.requestMatchers("/**").permitAll().and()
-//		.formLogin().loginPage("/signin").loginProcessingUrl("/userLogin")
-//		.successHandler(sucessHandler)
-//		.permitAll();
-//
-//
-//		return http.build();
-//	}
-    /*
-     */
-
-
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         // @formatter:off

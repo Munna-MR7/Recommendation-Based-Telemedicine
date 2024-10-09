@@ -1,10 +1,119 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{base::layout(~{::section})}" >
 <head>
     <meta charset="UTF-8">
-    <title>Profile</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile - Telemedicine</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
-  <h1> Your Profile</h1>
+    <section>
+        <div class="container mt-4">
+            <div class="row">
+                <!-- Profile Section -->
+                <div class="col-md-4 text-center">
+                    <!-- Display Profile Picture -->
+                    <img th:src="@{/images/default-profile.png}" id="profile-pic" alt="Profile Picture" class="img-thumbnail" style="width: 150px; height: 150px;">
+                    <h3 th:text="${user.fullName}">John Doe</h3>
+
+                    <!-- Upload Profile Picture -->
+                    <form method="POST" enctype="multipart/form-data" action="/uploadProfilePicture">
+                        <div class="form-group">
+                            <label for="profilePicture">Upload Profile Picture</label>
+                            <input type="file" class="form-control-file" id="profilePicture" name="profilePicture">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Upload Picture</button>
+                    </form>
+                </div>
+
+                <!-- User Info Section -->
+                <div class="col-md-8">
+                    <h3>User Information</h3>
+                    <ul class="list-group mb-4">
+                        <li class="list-group-item"><strong>Email:</strong> <span th:text="${user.email}">john.doe@example.com</span></li>
+                        <li class="list-group-item"><strong>Phone:</strong> <span th:text="${user.phoneNumber}">+123456789</span></li>
+                        <li class="list-group-item"><strong>Date of Birth:</strong> <span th:text="${user.dateOfBirth}">01-01-1985</span></li>
+                        <li class="list-group-item"><strong>Address:</strong> <span th:text="${user.address}">123 Main St, City</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Health Records Section -->
+            <div class="row mt-4">
+                <div class="col-md-12">
+                    <h3>Health Records</h3>
+                    <ul class="list-group">
+                        <li class="list-group-item" th:each="record : ${user.healthRecords}">
+                            <strong th:text="${record.date}">01-01-2023</strong> - <span th:text="${record.description}">Blood Test</span>
+                            <a th:href="@{'/downloadRecord/' + ${record.id}}" class="btn btn-sm btn-info float-right">Download</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Appointment History / Scheduling Section -->
+            <div class="row mt-4">
+                <div class="col-md-12">
+                    <h3>Appointment History</h3>
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Doctor</th>
+                            <th>Status</th>
+                            <th>Payment</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="appointment : ${user.appointments}">
+                            <td th:text="${appointment.date}">01-02-2023</td>
+                            <td th:text="${appointment.doctorName}">Dr. Jane Smith</td>
+                            <td th:text="${appointment.status}">Completed</td>
+                            <td>
+                                <span th:text="${appointment.paymentStatus}">Unpaid</span>
+                                <div th:if="${appointment.paymentStatus} == 'Unpaid'">
+                                    <a th:href="@{'/pay/' + ${appointment.id}}" class="btn btn-warning btn-sm">Pay Now</a>
+                                </div>
+                            </td>
+                            <td><a th:href="@{'/appointmentDetails/' + ${appointment.id}}" class="btn btn-info btn-sm">View</a></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Assigned Doctors Section -->
+            <div class="row mt-4">
+                <div class="col-md-12">
+                    <h3>Assigned Doctors</h3>
+                    <ul class="list-group">
+                        <li class="list-group-item" th:each="doctor : ${user.assignedDoctors}">
+                            <strong th:text="${doctor.name}">Dr. Jane Smith</strong>
+                            <span th:text="'Specialty: ' + ${doctor.specialty}"> - Cardiologist</span>
+                            <a th:href="@{'/doctorProfile/' + ${doctor.id}}" class="btn btn-sm btn-info float-right">View Profile</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Prescription Download Section -->
+            <div class="row mt-4">
+                <div class="col-md-12">
+                    <h3>Prescriptions</h3>
+                    <ul class="list-group">
+                        <li class="list-group-item" th:each="prescription : ${user.prescriptions}">
+                            <strong th:text="${prescription.date}">01-03-2023</strong> - <span th:text="${prescription.medicineSummary}">Paracetamol, Ibuprofen</span>
+                            <a th:href="@{'/downloadPrescription/' + ${prescription.id}}" class="btn btn-sm btn-success float-right">Download Prescription</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+    </section>
+
 </body>
 </html>
