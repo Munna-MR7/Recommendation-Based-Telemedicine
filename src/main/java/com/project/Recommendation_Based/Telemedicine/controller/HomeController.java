@@ -1,5 +1,8 @@
 package com.project.Recommendation_Based.Telemedicine.controller;
 
+import com.project.Recommendation_Based.Telemedicine.entity.Doctor;
+import com.project.Recommendation_Based.Telemedicine.repository.DoctorRepo;
+import com.project.Recommendation_Based.Telemedicine.service.DoctorService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,22 +11,25 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.security.Principal;
-        import java.security.Principal;
-        import org.springframework.beans.factory.annotation.Autowired;
-        import org.springframework.stereotype.Controller;
-        import org.springframework.ui.Model;
-        import org.springframework.web.bind.annotation.GetMapping;
-        import org.springframework.web.bind.annotation.ModelAttribute;
-        import org.springframework.web.bind.annotation.PostMapping;
-        import org.springframework.web.bind.annotation.RequestParam;
-        import org.springframework.web.bind.annotation.ResponseBody;
-        import org.springframework.web.multipart.MultipartFile;
+import java.security.Principal;
+import java.util.List;
+import java.util.Optional;
 
-        import com.project.Recommendation_Based.Telemedicine.entity.User;
-        import  com.project.Recommendation_Based.Telemedicine.dto.UserDTO;
-        import com.project.Recommendation_Based.Telemedicine.repository.UserRepo;
-        import com.project.Recommendation_Based.Telemedicine.service.UserService;
-        import jakarta.servlet.http.HttpSession;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.project.Recommendation_Based.Telemedicine.entity.User;
+import  com.project.Recommendation_Based.Telemedicine.dto.UserDTO;
+import com.project.Recommendation_Based.Telemedicine.repository.UserRepo;
+import com.project.Recommendation_Based.Telemedicine.service.UserService;
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class HomeController {
@@ -98,6 +104,23 @@ public class HomeController {
 
 
     }
+
+    @GetMapping("/allDoctors")
+    public String allDoctor(){
+
+    }
+
+    @Autowired
+    private DoctorService doctorService;
+    @GetMapping("/doctor/all")
+    public List<Doctor> getDoctor() {
+        return (List<Doctor>) doctorService.getDoctors();
+    }
+
+//    @GetMapping("/student/{id}")
+//    public Optional<Doctor> getStudent(@PathVariable("id") int id) {
+//        return DoctorService.findById(id);
+//    }
 //    @PostMapping("/admin/insert_CSV_user")
 //    @ResponseBody
 //    public String uploaduserCSVFile(@RequestParam("file") MultipartFile file) {
