@@ -1,6 +1,7 @@
 package com.project.Recommendation_Based.Telemedicine.service;
 
 import com.project.Recommendation_Based.Telemedicine.entity.Appointment;
+import com.project.Recommendation_Based.Telemedicine.entity.User;
 import com.project.Recommendation_Based.Telemedicine.repository.AppointmentRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,7 @@ import com.itextpdf.text.pdf.PdfWriter;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -52,6 +54,12 @@ public class AppointmentServiceImpl implements AppointmentService {
 
         return new ByteArrayInputStream(out.toByteArray());
     }
+
+    @Override
+    public List<Appointment> getUserAppointments(User user) {
+        return appointmentRepo.findByUser(user);
+    }
+
 }
 
 

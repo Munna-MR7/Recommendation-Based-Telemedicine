@@ -22,7 +22,7 @@ public class UserController {
     private HealthRecordService healthRecordService;
     @Autowired
     private PrescriptionService prescriptionService;
-    @GetMapping("/profile")
+    @GetMapping("/user/Profile")
     public String viewProfile(Model model, Principal principal) {
         // Fetch the logged-in user's email
         String email = principal.getName();
@@ -37,7 +37,7 @@ public class UserController {
         model.addAttribute("prescriptions", prescriptionService.getUserPrescriptions(user));
 
         // Return the profile view
-        return "profile";  // This will render profile.html from the Thymeleaf template
+        return "userProfile";
     }
 
 
