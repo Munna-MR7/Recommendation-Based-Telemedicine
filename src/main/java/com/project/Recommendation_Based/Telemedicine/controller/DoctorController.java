@@ -32,7 +32,7 @@ public class DoctorController {
         model.addAttribute("doctors", doctors);
         return "doctorLists";
     }
-    @PostMapping("/Appointment")
+    @PostMapping("/user/Appointment")
     public String doctorAppointment(@ModelAttribute Doctor doctor, Model model){
         System.out.println(doctor.getName());
         System.out.println("ok");
