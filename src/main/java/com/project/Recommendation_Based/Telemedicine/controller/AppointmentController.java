@@ -41,16 +41,20 @@ public class AppointmentController {
     // Endpoint to download the PDF of the appointment receipt
     @GetMapping("/appointment/download/{id}")
     public ResponseEntity<InputStreamResource> downloadAppointmentReceipt(@PathVariable Integer id) throws DocumentException, IOException {
+
         // Fetch appointment details from the service layer
         Appointment appointment = appointmentService.getAppointmentById(id);
+
         // Generate the PDF using the service layer
         ByteArrayInputStream bis = appointmentService.generateAppointmentReceipt(appointment);
+
         // Set HTTP headers for the response
         HttpHeaders headers = new HttpHeaders();
-        headers.add("Content-Disposition", "inline; filename=appointment_" + id + ".pdf");
+        headers.add("Content-Disposition", "inline; filename=appointment_" + appointment.getPatientName() + ".pdf");
+
         // Return the PDF file as a ResponseEntity
         return ResponseEntity.ok()
-                .headers(headers)
+                .headers(headers) //the headers description of pdf file
                 .contentType(MediaType.APPLICATION_PDF)
                 .body(new InputStreamResource(bis));
     }
