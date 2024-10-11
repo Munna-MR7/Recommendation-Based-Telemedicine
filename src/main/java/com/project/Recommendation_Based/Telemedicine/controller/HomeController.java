@@ -58,11 +58,7 @@ public class HomeController {
 
     @GetMapping("/signin")
     public String login() { return "login";}
-<<<<<<< HEAD
-=======
 
-
->>>>>>> 4f1b50b (Appointment form created and download appointment reciept)
     @GetMapping("/admin/home")
     public String homeAd(){
         return "home";
@@ -71,96 +67,4 @@ public class HomeController {
     public String homeUser(){
         return "home";
     }
-<<<<<<< HEAD
-=======
-//    @GetMapping("/doctorLists")
->>>>>>> 4f1b50b (Appointment form created and download appointment reciept)
-
-    /*
-     * @GetMapping("/user/profile") public String profile(Principal p, Model m) {
-     * String email = p.getName(); User user = userRepo.findByEmail(email);
-     * m.addAttribute("user", user); return "profile"; }
-     *
-     * @GetMapping("/user/home") public String home() { return "home"; }
-     */
-
-    @PostMapping("/saveUser")
-    @ResponseBody
-    public String saveUser(@ModelAttribute User user, HttpSession session, Model m) {
-
-<<<<<<< HEAD
-        // System.out.println(user);
-=======
-         System.out.println(user);
->>>>>>> 4f1b50b (Appointment form created and download appointment reciept)
-
-        User u = userService.saveUser(user);
-
-        if (u != null) {
-
-            session.setAttribute("msg", "Register successfully");
-
-        } else {
-
-            session.setAttribute("msg", "Something wrong server");
-        }
-        return "Register successfully";
-    }
-    @PostMapping("/admin/saveUser")
-    @ResponseBody
-    public Void saveStudent(UserDTO user) {
-
-        System.out.println(user);
-
-        userService.saveStudent(user);
-        return null;
-
-
-    }
-
-<<<<<<< HEAD
-    @GetMapping("/allDoctors")
-    public String allDoctor(){
-
-    }
-
-    @Autowired
-    private DoctorService doctorService;
-    @GetMapping("/doctor/all")
-    public List<Doctor> getDoctor() {
-        return (List<Doctor>) doctorService.getDoctors();
-    }
-=======
-
-//    @Autowired
-//    private DoctorService doctorService;
-//    @GetMapping("/user/doctorLists")
-//    public List<Doctor> getDoctor() {
-//        return (List<Doctor>) doctorService.getDoctors();
-//    }
-
-
->>>>>>> 4f1b50b (Appointment form created and download appointment reciept)
-
-//    @GetMapping("/student/{id}")
-//    public Optional<Doctor> getStudent(@PathVariable("id") int id) {
-//        return DoctorService.findById(id);
-//    }
-//    @PostMapping("/admin/insert_CSV_user")
-//    @ResponseBody
-//    public String uploaduserCSVFile(@RequestParam("file") MultipartFile file) {
-//        try {
-//            userService.insertuserDataFromCSV(file);
-//            return "save";
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            return "error";
-//        }
-//    }
-
-//	@PostMapping("/start")
-//    public ResponseEntity<String> handleStartPost(@RequestBody YourRequestObject request) {
-//        // Your logic here
-//        return ResponseEntity.ok("Process started successfully");
-//    }
 }

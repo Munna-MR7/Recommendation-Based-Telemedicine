@@ -18,10 +18,7 @@ public class SecurityConfig {
 
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
-<<<<<<< HEAD
-=======
 
->>>>>>> 4f1b50b (Appointment form created and download appointment reciept)
         return new BCryptPasswordEncoder();
     }
 
@@ -69,7 +66,6 @@ public class SecurityConfig {
 
         return http.build();
     }
-    /*
-     */
+
 
 }

@@ -19,7 +19,7 @@
 
                     <!-- Upload Profile Picture -->
 <!--                    <form method="POST" enctype="multipart/form-data" action="/uploadProfilePicture">-->
-                    <form  enctype="multipart/form-data" >
+                    <form  >
                         <div class="form-group">
                             <label for="profilePicture">Upload Profile Picture</label>
                             <input type="file" class="form-control-file" id="profilePicture" name="profilePicture">
@@ -95,7 +95,7 @@
                     <ul class="list-group">
                         <li class="list-group-item" th:each="doctor : ${user.assignedDoctors}">
                             <strong th:text="${doctor.name}">Dr. Jane Smith</strong>
-                            <span th:text="'Specialty: ' + ${doctor.specialty}"> - Cardiologist</span>
+                            <span th:text="'Specialty: ' + ${doctor.designation}"> - Cardiologist</span>
                             <a href="#" class="btn btn-sm btn-info float-right">View Profile</a>
 <!--                            th:href="@{'/doctorProfile/' + ${doctor.id}}"-->
                         </li>
