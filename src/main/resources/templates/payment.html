@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Make Payment</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+    <h3>Make a Payment</h3>
+    <p>Total Amount: <b th:text="${amount}"></b> BDT</p>
+
+    <!-- Payment Method Selection -->
+    <form action="#" id="payment-form">
+        <div class="form-group">
+            <label>Select Payment Method:</label>
+            <select class="form-control" id="paymentMethod" name="paymentMethod">
+                <option value="bkash">Bkash</option>
+                <option value="nogod">Nagad</option>
+                <option value="rocket">Rocket</option>
+                <option value="card">Card Payment</option>
+            </select>
+        </div>
+
+        <!-- Pay Now Button -->
+        <button type="button" id="payNow" class="btn btn-success">Pay Now</button>
+    </form>
+</div>
+
+<script>
+    document.getElementById('payNow').addEventListener('click', function() {
+        var paymentMethod = document.getElementById('paymentMethod').value;
+
+        // Make a POST request to initiate the payment based on the selected method
+        fetch('/payment/process', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ method: paymentMethod, appointmentId: [[${appointmentId}]] })
+        }).then(response => response.json())
+          .then(data => {
+              // Redirect to payment gateway URL received from backend
+              window.location.href = data.paymentUrl;
+          });
+    });
+</script>
+</body>
+</html>

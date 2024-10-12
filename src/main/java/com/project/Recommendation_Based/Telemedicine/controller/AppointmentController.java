@@ -2,6 +2,7 @@ package com.project.Recommendation_Based.Telemedicine.controller;
 
 import com.project.Recommendation_Based.Telemedicine.entity.Appointment;
 import com.project.Recommendation_Based.Telemedicine.service.AppointmentService;
+import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -51,6 +52,10 @@ public class AppointmentController {
         // Set HTTP headers for the response
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Disposition", "inline; filename=appointment_" + appointment.getPatientName() + ".pdf");
+//        if(appointment.getPaymentStatus()== null){
+//            appointment.="Unpaid";
+//        }
+
 
         // Return the PDF file as a ResponseEntity
         return ResponseEntity.ok()
@@ -58,6 +63,11 @@ public class AppointmentController {
                 .contentType(MediaType.APPLICATION_PDF)
                 .body(new InputStreamResource(bis));
     }
+
+//    @PostMapping("/payLater")
+//    public void payLater(){
+//        appointmentService.setPaymentStatus("Unpaid");
+//    }
 }
 
 

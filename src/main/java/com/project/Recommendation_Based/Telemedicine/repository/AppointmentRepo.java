@@ -10,6 +10,7 @@ import java.util.List;
 @Repository
 public interface AppointmentRepo extends JpaRepository<Appointment, Integer> {
     List<Appointment> findByUser(User user);
+    //String setPaymentStatus(String paymentStatus);
 
 
 }

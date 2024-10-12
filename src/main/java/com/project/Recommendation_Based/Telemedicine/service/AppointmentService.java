@@ -17,5 +17,6 @@ public interface AppointmentService {
     //List<Appointment> getUserAppointments(User user);
 
     List<Appointment> getUserAppointments(User user);
+    //public String setPaymentStatus(String paymentStatus);
 
 }
