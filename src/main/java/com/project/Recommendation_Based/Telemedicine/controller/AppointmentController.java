@@ -63,6 +63,10 @@ public class AppointmentController {
                 .contentType(MediaType.APPLICATION_PDF)
                 .body(new InputStreamResource(bis));
     }
+    @GetMapping("/payNow")
+    public String payNow(){
+        return "Payment";
+    }
 
 //    @PostMapping("/payLater")
 //    public void payLater(){

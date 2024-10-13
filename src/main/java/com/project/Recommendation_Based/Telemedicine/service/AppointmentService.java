@@ -8,11 +8,12 @@ import org.springframework.stereotype.Service;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 
 public interface AppointmentService {
     public Appointment saveAppointment(Appointment appointment);
-    public Appointment getAppointmentById(Integer id);
+    public Appointment getAppointmentById(Integer appointmentId);
     public ByteArrayInputStream generateAppointmentReceipt(Appointment appointment) throws DocumentException, IOException;
     //List<Appointment> getUserAppointments(User user);
 

@@ -1,46 +1,108 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Make Payment</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <title>Payment Page</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <style>
+        .modal-dialog {
+            max-width: 600px;
+        }
+        .payment-options img {
+            width: 100px;
+            margin: 10px;
+            cursor: pointer;
+        }
+        .floating-payment-modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+        .modal-content {
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
+
 <div class="container mt-5">
-    <h3>Make a Payment</h3>
-    <p>Total Amount: <b th:text="${amount}"></b> BDT</p>
+    <h2>Appointment Success</h2>
+    <p>Payment is due for the consultation fee. Please click the button below to pay.</p>
+    <button id="pay-now" class="btn btn-success">Pay Now</button>
+</div>
 
-    <!-- Payment Method Selection -->
-    <form action="#" id="payment-form">
-        <div class="form-group">
-            <label>Select Payment Method:</label>
-            <select class="form-control" id="paymentMethod" name="paymentMethod">
-                <option value="bkash">Bkash</option>
-                <option value="nogod">Nagad</option>
-                <option value="rocket">Rocket</option>
-                <option value="card">Card Payment</option>
-            </select>
+<!-- Floating Payment Modal -->
+<div class="floating-payment-modal" id="payment-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Choose Payment Method</h5>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="payment-options">
+                    <img src="/static/images/bkash-logo.png" alt="Bkash" id="bkash-option">
+                    <img src="/static/images/nogod-logo.png" alt="Nagad" id="nagad-option">
+                    <img src="/static/images/card-logo.png" alt="Card" id="card-option">
+                </div>
+                <p class="text-muted">Click on the logo of your preferred payment method</p>
+            </div>
         </div>
-
-        <!-- Pay Now Button -->
-        <button type="button" id="payNow" class="btn btn-success">Pay Now</button>
-    </form>
+    </div>
 </div>
 
 <script>
-    document.getElementById('payNow').addEventListener('click', function() {
-        var paymentMethod = document.getElementById('paymentMethod').value;
+    $(document).ready(function () {
+        $('#pay-now').click(function () {
+            $('#payment-modal').fadeIn();
+        });
 
-        // Make a POST request to initiate the payment based on the selected method
-        fetch('/payment/process', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ method: paymentMethod, appointmentId: [[${appointmentId}]] })
-        }).then(response => response.json())
-          .then(data => {
-              // Redirect to payment gateway URL received from backend
-              window.location.href = data.paymentUrl;
-          });
+        $('.close').click(function () {
+            $('#payment-modal').fadeOut();
+        });
+
+        $('#bkash-option').click(function () {
+            initiatePayment();
+        });
+
+        $('#nagad-option').click(function () {
+            initiatePayment();
+        });
+
+        $('#card-option').click(function () {
+            initiatePayment();
+        });
+
+        function initiatePayment() {
+            const paymentRequest = {
+                customerName: "John Doe",
+                customerEmail: "john.doe@example.com",
+                customerPhone: "017xxxxxxxx",
+                amount: 500.00
+            };
+
+            $.ajax({
+                url: '/payment/initiate',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(paymentRequest),
+                success: function (response) {
+                    window.open(response.paymentUrl, '_blank');
+                    $('#payment-modal').fadeOut();
+                },
+                error: function (error) {
+                    alert('Error initiating payment. Please try again.');
+                }
+            });
+        }
     });
 </script>
+
 </body>
 </html>

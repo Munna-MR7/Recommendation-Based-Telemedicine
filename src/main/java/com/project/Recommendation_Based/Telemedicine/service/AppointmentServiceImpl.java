@@ -27,8 +27,8 @@ public class AppointmentServiceImpl implements AppointmentService {
 
 
 
-    public Appointment getAppointmentById(Integer id) {
-        Optional<Appointment> appointment = appointmentRepo.findById(id);
+    public Appointment getAppointmentById(Integer appointmentId) {
+        Optional<Appointment> appointment = appointmentRepo.findById(appointmentId);
         return appointment.orElseThrow(() -> new RuntimeException("Appointment not found!"));
     }
 
@@ -78,6 +78,8 @@ public class AppointmentServiceImpl implements AppointmentService {
     public List<Appointment> getUserAppointments(User  user) {
         return appointmentRepo.findByUser(user);
     }
+
+
 
 }
 
