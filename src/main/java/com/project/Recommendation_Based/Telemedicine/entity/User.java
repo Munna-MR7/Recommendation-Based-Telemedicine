@@ -39,6 +39,10 @@ public class User {
 	@OneToMany(mappedBy = "user")
 	private List<Prescription> prescriptions;
 
+	@OneToMany(mappedBy = "user")
+	private List<Payment> payments;
+
+
 	@ManyToMany
 	@JoinTable(
 			name = "user_doctor",

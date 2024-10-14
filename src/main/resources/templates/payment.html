@@ -85,6 +85,7 @@
                 customerEmail: "john.doe@example.com",
                 customerPhone: "017xxxxxxxx",
                 amount: 500.00
+
             };
 
             $.ajax({
@@ -93,8 +94,12 @@
                 contentType: 'application/json',
                 data: JSON.stringify(paymentRequest),
                 success: function (response) {
-                    window.open(response.paymentUrl, '_blank');
-                    $('#payment-modal').fadeOut();
+                    if (response.paymentUrl) {
+                        window.open(response.paymentUrl, '_blank');
+                        $('#payment-modal').fadeOut();
+                    } else {
+                        alert('Payment URL not found. Please try again.');
+                    }
                 },
                 error: function (error) {
                     alert('Error initiating payment. Please try again.');

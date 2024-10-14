@@ -1,13 +1,11 @@
 package com.project.Recommendation_Based.Telemedicine.controller;
 
-import com.project.Recommendation_Based.Telemedicine.entity.Appointment;
-import com.project.Recommendation_Based.Telemedicine.entity.PaymentRequest;
+import com.project.Recommendation_Based.Telemedicine.dto.PaymentRequest;
 import com.project.Recommendation_Based.Telemedicine.service.PaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -31,16 +29,20 @@ public class PaymentController {
             return ResponseEntity.ok(response);
 
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+            e.printStackTrace();  // Make sure to log the error for debugging
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of("error", "Payment initiation failed"));
         }
+
     }
 
-    @GetMapping("/confirm")
+    @PostMapping("/confirm")
+    @ResponseBody
     public String confirmPayment(@RequestParam("status") String status, @RequestParam("tran_id") String transactionId) {
         // Confirm the payment and update the status in the database
         paymentService.confirmPayment(transactionId, status);
+        return "Payment Success!!";
 
         // Redirect to profile page after confirmation
-        return "redirect:/profile";
+//        return "redirect:/profile";
     }
 }

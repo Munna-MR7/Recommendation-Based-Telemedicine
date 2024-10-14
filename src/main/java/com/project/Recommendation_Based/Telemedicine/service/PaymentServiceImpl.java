@@ -1,7 +1,6 @@
 package com.project.Recommendation_Based.Telemedicine.service;
 
-import com.project.Recommendation_Based.Telemedicine.entity.Appointment;
-import com.project.Recommendation_Based.Telemedicine.entity.PaymentRequest;
+import com.project.Recommendation_Based.Telemedicine.dto.PaymentRequest;
 import com.project.Recommendation_Based.Telemedicine.repository.AppointmentRepo;
 import org.cloudinary.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +15,6 @@ import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -28,10 +26,9 @@ public class PaymentServiceImpl implements PaymentService {
     // SSLCommerz Sandbox Credentials
     private final String storeId = "rmedi670acea5f07e5";
     private final String storePassword = "rmedi670acea5f07e5@ssl";
-    private final String baseUrl = "http://localhost:8080/";
+    private final String baseUrl = "https://sandbox.sslcommerz.com/";
 
     public String initiatePayment(PaymentRequest paymentRequest) throws IOException, InterruptedException {
-
         // Set up the parameters for payment initiation
         Map<String, String> parameters = new HashMap<>();
         parameters.put("store_id", storeId);
@@ -45,6 +42,18 @@ public class PaymentServiceImpl implements PaymentService {
         parameters.put("cus_name", paymentRequest.getCustomerName());
         parameters.put("cus_email", paymentRequest.getCustomerEmail());
         parameters.put("cus_phone", paymentRequest.getCustomerPhone());
+        parameters.put("cus_add1", "Customer Address");  // Add customer address
+        parameters.put("cus_city", "Dhaka");  // Add customer city
+        parameters.put("cus_country", "Bangladesh");  // Add customer country
+        parameters.put("shipping_method", "NO");  // Set shipping method
+        parameters.put("product_name", "Consultation Fee");  // Set product name
+        parameters.put("product_category", "Service");
+        parameters.put("product_profile", "general");  // Set shipping method to NO since it's not required
+
+//        // Optional fields (add if necessary)
+//        parameters.put("cus_add2", "");  // Optional
+//        parameters.put("cus_state", "");  // Optional
+//        parameters.put("cus_fax", "");  // Optional
 
         // Make an HTTP call to SSLCommerz for payment initiation
         HttpClient httpClient = HttpClient.newHttpClient();
@@ -56,14 +65,27 @@ public class PaymentServiceImpl implements PaymentService {
 
         HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
 
+        // Log the full response from SSLCommerz for debugging
+        System.out.println("SSLCommerz Response: " + response.body());
+
         // Parse response JSON to extract the payment URL
         JSONObject jsonResponse = new JSONObject(response.body());
-        return jsonResponse.getString("GatewayPageURL");
+
+        if (jsonResponse.has("GatewayPageURL")) {
+            return jsonResponse.getString("GatewayPageURL");
+        } else {
+            throw new IOException("Failed to retrieve GatewayPageURL");
+        }
     }
+
+
+
 
     public void confirmPayment(String transactionId, String status) {
         // Confirm the payment status and update your DB accordingly (implementation as needed)
         System.out.println("Transaction ID: " + transactionId + ", Status: " + status);
+
+
     }
 
     private String getParamsString(Map<String, String> params) {
