@@ -1,6 +1,7 @@
 package com.project.Recommendation_Based.Telemedicine.controller;
 
 import com.project.Recommendation_Based.Telemedicine.entity.User;
+import com.project.Recommendation_Based.Telemedicine.repository.UserRepo;
 import com.project.Recommendation_Based.Telemedicine.service.AppointmentService;
 import com.project.Recommendation_Based.Telemedicine.service.HealthRecordService;
 import com.project.Recommendation_Based.Telemedicine.service.PrescriptionService;
@@ -27,6 +28,19 @@ public class UserController {
     @Autowired
     private PrescriptionService prescriptionService;
 
+    @Autowired
+    private UserRepo userRepo;
+
+    @ModelAttribute
+    public void commonUser(Principal p, Model m) {
+        if (p != null) {
+            String email = p.getName();
+            User user = userRepo.findByEmail(email);
+            m.addAttribute("user", user);
+        }
+
+    }
+
     @PostMapping("/saveUser")
     @ResponseBody
     public String saveUser(@ModelAttribute User user, HttpSession session, Model m) {
@@ -46,7 +60,7 @@ public class UserController {
         }
         return "Register successfully";
     }
-    @GetMapping("/user/Profile")
+    @GetMapping("/Profile")
     public String viewProfile(Model model, Principal principal) {
         // Fetch the logged-in user's email
         String email = principal.getName();

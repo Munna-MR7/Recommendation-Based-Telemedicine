@@ -1,14 +1,15 @@
 package com.project.Recommendation_Based.Telemedicine.controller;
 
 import com.project.Recommendation_Based.Telemedicine.entity.Appointment;
+import com.project.Recommendation_Based.Telemedicine.entity.Doctor;
+import com.project.Recommendation_Based.Telemedicine.entity.User;
+import com.project.Recommendation_Based.Telemedicine.repository.UserRepo;
 import com.project.Recommendation_Based.Telemedicine.service.AppointmentService;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.itextpdf.text.DocumentException;
@@ -16,19 +17,43 @@ import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
-
+import java.security.Principal;
 
 
 @Controller
+
 public class AppointmentController {
+
+
+    @Autowired
+    private UserRepo userRepo;
+
+    @ModelAttribute
+    public void commonUser(Principal p, Model m) {
+        if (p != null) {
+            String email = p.getName();
+            User user = userRepo.findByEmail(email);
+            m.addAttribute("user", user);
+        }
+
+    }
 
     @Autowired
     private AppointmentService appointmentService;
+
+    @PostMapping("/Appointment")
+    public String doctorAppointment(@ModelAttribute Doctor doctor, Model model){
+        System.out.println(doctor.getName());
+        System.out.println("ok");
+
+        //Optional<Doctor> doctor= doctorService.searchDoctor();
+        model.addAttribute("doctor", doctor);
+        return "doctorAppointment";
+    }
+
     @PostMapping("/makeAppointment")
     public String submitAppointmentForm(@ModelAttribute Appointment appointment, RedirectAttributes ra, Model model) {
 

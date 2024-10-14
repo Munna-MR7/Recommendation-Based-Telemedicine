@@ -37,35 +37,28 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        // @formatter:off
-
         http
-                .csrf((csrf) -> csrf.disable())
-                .authorizeHttpRequests((authorize) -> {
-
+                .csrf(csrf -> csrf.disable())  // Disable CSRF for simplicity
+                .authorizeHttpRequests(authorize -> {
                     authorize.requestMatchers("/user/**").hasRole("USER");
                     authorize.requestMatchers("/admin/**").hasRole("ADMIN");
+                    authorize.requestMatchers("/Appointment").authenticated();  // Protect Appointment
                     authorize.requestMatchers("/**").permitAll();
-                    authorize.anyRequest().authenticated();
-
                 })
-                .formLogin(formLogin ->
-                        formLogin
-                                .loginPage("/signin")
-                                .loginProcessingUrl("/userLogin")
-                                //.defaultSuccessUrl("/user/profile", true)
-                                .successHandler(successHandler)
-                                .permitAll()
+                .formLogin(formLogin -> formLogin
+                        .loginPage("/signin")
+                        .loginProcessingUrl("/userLogin")
+                        .successHandler(successHandler)  // Handle success
+                        .permitAll()
                 )
-                .logout(logout->
-                        logout
-                                .logoutUrl("/userLogout")
-                                .logoutSuccessUrl("/")
-                                .permitAll());
-        // @formatter:on
-
+                .logout(logout -> logout
+                        .logoutUrl("/userLogout")
+                        .logoutSuccessUrl("/")
+                        .permitAll()
+                );
         return http.build();
     }
+
 
 
 }

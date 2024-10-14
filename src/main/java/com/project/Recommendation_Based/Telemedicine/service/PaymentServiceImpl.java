@@ -85,7 +85,6 @@ public class PaymentServiceImpl implements PaymentService {
         // Confirm the payment status and update your DB accordingly (implementation as needed)
         System.out.println("Transaction ID: " + transactionId + ", Status: " + status);
 
-
     }
 
     private String getParamsString(Map<String, String> params) {

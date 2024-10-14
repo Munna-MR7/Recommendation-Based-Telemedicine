@@ -8,5 +8,5 @@ import java.io.IOException;
 public interface PaymentService {
 
     public String initiatePayment(PaymentRequest paymentRequest) throws IOException, InterruptedException;
-    public void confirmPayment(@RequestParam("status") String status, @RequestParam("tran_id") String transactionId);
+    public void confirmPayment( String transactionId,String status);
 }
