@@ -20,9 +20,7 @@ public class CustomUser implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-
         SimpleGrantedAuthority authority = new SimpleGrantedAuthority(user.getRole());
-
         return Arrays.asList(authority);
     }
 
@@ -56,5 +54,8 @@ public class CustomUser implements UserDetails {
         return true;
     }
 
+    // Add this method to return the original User entity
+    public User getUser() {
+        return this.user;
+    }
 }
-

@@ -1,5 +1,6 @@
 package com.project.Recommendation_Based.Telemedicine.controller;
 
+import com.project.Recommendation_Based.Telemedicine.Config.CustomUser;
 import com.project.Recommendation_Based.Telemedicine.dto.PaymentRequest;
 import com.project.Recommendation_Based.Telemedicine.entity.Payment;
 import com.project.Recommendation_Based.Telemedicine.entity.User;
@@ -10,6 +11,8 @@ import com.project.Recommendation_Based.Telemedicine.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -66,9 +69,8 @@ public class PaymentController {
     public String confirmPayment(@RequestParam("status") String status, @RequestParam("tran_id") String transactionId, @RequestParam("amount") String amountSt) {
 
         double amount =Double.parseDouble(amountSt);// Integer.parseInt(amountSt);
+
         //System.out.println("Status:"+status + "\nT_Id: "+ transactionId + "\nAmount: "+ amount);
-         //Retrieve the payment information (you can also retrieve the amount and other details from the session)
-          // Replace with the actual amount
 
         // Create a Payment entity and set its values
         Payment payment = new Payment();
@@ -76,17 +78,35 @@ public class PaymentController {
         payment.setTransactionId(transactionId);
         payment.setStatus(status);
 
-        // Assuming you have a logged-in user
-        // You can retrieve the User from the session or authentication context
-        // payment.setUser(loggedInUser);
+        // Retrieve the authentication object from the security context
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-        // Save the payment details in the database
+        Object principal = authentication.getPrincipal();
+        User loggedInUser;
+
+        if (principal instanceof CustomUser) {
+            // If principal is an instance of CustomUser, get the actual User entity
+            loggedInUser = ((CustomUser) principal).getUser();
+            System.out.println("Yes: Instance");
+        } else if (principal instanceof String) {
+            // If principal is a String (email), fetch the user from the database
+            String email = (String) principal;
+            loggedInUser = userRepo.findByEmail(email);
+            System.out.println("Yes: String " + email);
+        } else {
+            System.out.println("None");
+            // Handle case when neither CustomUser nor String (should not happen)
+            throw new IllegalStateException("Unexpected authentication principal type");
+
+        }
+
+        // Set the user in the payment entity
+        payment.setUser(loggedInUser);
+
+        // Now continue saving the payment, or any other business logic
         paymentRepo.save(payment);
 
-        // Confirm the payment in the payment service
-        //paymentService.confirmPayment(transactionId, status);
 
-        // Redirect to profile page after confirmation
 
         return "payment Success";
 

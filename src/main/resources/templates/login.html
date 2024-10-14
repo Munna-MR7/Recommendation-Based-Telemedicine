@@ -8,7 +8,7 @@
 </head>
 
 <body>
-<section class="mainbody ">
+<section class="d-flex  justify-content-center" style="min-height: 60vh;">
     <div class="container p-3 ">
         <div class="row">
             <div class="col-md-6 offset-md-3 d-flex justify-content-center align-items-center" >
@@ -33,6 +33,10 @@
                                 </div>
                                 <button class="btn btn-primary col-md-12">Login</button>
                             </form>
+                            <div class="text-center mt-3 mb-3">
+                                <a href="#" th:href="@{/forgotPassword}">Forget password?</a> |
+                                <a href="#" th:href="@{/doctorLogin}">Login as a Doctor?</a>
+                            </div>
                         </div>
                 </div>
             </div>
