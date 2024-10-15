@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"  th:replace="~{base::layout(~{::section})}">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{base::layout(~{::section})}" >
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -30,7 +30,8 @@
                         <p>Please choose an option for your consultation fee.</p>
                         <p>Consultation Fee: <strong th:text="${appointment.consultationFee}">[Consultation Fee]</strong></p>
                         <div class="btn-group mt-3" role="group">
-                            <a th:href="@{/payNow}" class="btn btn-success">Pay Now</a>
+
+                            <button id="pay-now" class="btn btn-success">Pay Now</button>
                             <button th:action="@{/payLater}" method="POST" type="button" class="btn btn-secondary">Pay Later</button>
                         </div>
                     </div>
@@ -47,6 +48,11 @@
             </div>
         </div>
     </section>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7W3mgPxhUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
 
 
 </body>

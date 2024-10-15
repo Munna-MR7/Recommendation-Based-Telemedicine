@@ -2,6 +2,7 @@ package com.project.Recommendation_Based.Telemedicine.service;
 
 import com.project.Recommendation_Based.Telemedicine.dto.UserDTO;
 import com.project.Recommendation_Based.Telemedicine.entity.Doctor;
+import com.project.Recommendation_Based.Telemedicine.entity.DoctorRequest;
 import com.project.Recommendation_Based.Telemedicine.entity.User;
 import com.project.Recommendation_Based.Telemedicine.repository.DoctorRepo;
 
@@ -38,14 +39,7 @@ public class DoctorServiceImpl implements DoctorService {
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
-    @Override
-    public Doctor saveDoctor(Doctor doctor) {
 
-        String password=passwordEncoder.encode(doctor.getPassword());
-        doctor.setPassword(password);
-        doctor.setRole("ROLE_USER");
-        return doctorRepo.save(doctor);
-    }
 
     @Override
     public void removeSessionMessage() {
@@ -54,6 +48,12 @@ public class DoctorServiceImpl implements DoctorService {
                 .getSession();
 
         session.removeAttribute("msg");
+    }
+
+    @Override
+    public void saveDoctorRequest(DoctorRequest doctorRequest) {
+
+
     }
 
 }

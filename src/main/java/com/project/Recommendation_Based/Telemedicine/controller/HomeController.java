@@ -45,4 +45,9 @@ public class HomeController {
     public String homeUser(){
         return "home";
     }
+
+    @GetMapping("/doctorRegisterPage")
+    public String doctorRegisterPage(){
+        return "doctorRegisterPage";
+    }
 }

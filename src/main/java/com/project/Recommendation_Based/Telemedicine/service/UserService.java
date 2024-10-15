@@ -12,11 +12,14 @@ public interface UserService {
 
     public void removeSessionMessage();
 
-    void saveStudent(UserDTO user);
+    //void saveStudent(UserDTO user);
 
     public User getUserProfile(String email);
 
     User findByEmail(String email);
+
+    void saveDoctor(User user);
+
 
     //public void insertuserDataFromCSV(MultipartFile file) throws IOException, CsvValidationException, NumberFormatException;
 

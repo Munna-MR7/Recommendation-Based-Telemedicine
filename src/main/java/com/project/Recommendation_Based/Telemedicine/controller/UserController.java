@@ -40,7 +40,6 @@ public class UserController {
         }
 
     }
-
     @PostMapping("/saveUser")
     @ResponseBody
     public String saveUser(@ModelAttribute User user, HttpSession session, Model m) {
@@ -60,6 +59,17 @@ public class UserController {
         }
         return "Register successfully";
     }
+
+    @PostMapping("/saveDoctor")
+    @ResponseBody
+    public String saveDoctor(@ModelAttribute User user, HttpSession session, Model m) {
+
+
+        System.out.println(user);
+        userService.saveDoctor(user);
+        return "Success";
+    }
+
     @GetMapping("/Profile")
     public String viewProfile(Model model, Principal principal) {
         // Fetch the logged-in user's email

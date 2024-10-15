@@ -1,6 +1,7 @@
 package com.project.Recommendation_Based.Telemedicine.controller;
 
 import com.project.Recommendation_Based.Telemedicine.entity.Doctor;
+import com.project.Recommendation_Based.Telemedicine.entity.DoctorRequest;
 import com.project.Recommendation_Based.Telemedicine.entity.User;
 import com.project.Recommendation_Based.Telemedicine.repository.UserRepo;
 import com.project.Recommendation_Based.Telemedicine.service.DoctorService;
@@ -46,6 +47,13 @@ public class DoctorController {
         List<Doctor> doctors= doctorService.getDoctors();
         model.addAttribute("doctors", doctors);
         return "doctorLists";
+    }
+
+    @PostMapping("doctorRequest")
+    public String doctorRequest(@ModelAttribute DoctorRequest doctorRequest){
+        doctorService.saveDoctorRequest(doctorRequest);
+        return "successs";
+
     }
 
 }

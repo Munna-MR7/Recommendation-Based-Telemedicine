@@ -17,12 +17,11 @@ public class Doctor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
-    private String role;
     private String degrees;
-    private String password;
     private String email;
-    private String designation;
+    private String Specialist;
     private String consultationFee;
+    private String documents;
 
 
 

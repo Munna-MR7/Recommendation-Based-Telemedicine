@@ -25,9 +25,6 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepo userRepo;
-//    @Autowired
-//    private TypeRepo typeRepo;
-
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
@@ -37,16 +34,6 @@ public class UserServiceImpl implements UserService {
         String password=passwordEncoder.encode(user.getPassword());
         user.setPassword(password);
         user.setRole("ROLE_USER");
-
-
-//		Type t = new Type();
-//		t.setName("electric");
-//		typeRepo.save(t);
-//		Type t2 = new Type();
-//		t2.setName("furniture");
-//		typeRepo.save(t2);
-
-
         return userRepo.save(user);
 
     }
@@ -63,24 +50,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void saveStudent(UserDTO userDTO) {
-        String password=passwordEncoder.encode(userDTO.getPassword());
-        String email= userDTO.getEmail();
-        String name= userDTO.getName();
-
-        User user=new User();
-        user.setEmail(email);
-        user.setName(name);
-        user.setPassword(password);
-        user.setRole("ROLE_USER");
-
-        userRepo.save(user);
-
-
-
-    }
-
-    @Override
     public User getUserProfile(String email) {
         return userRepo.findByEmail(email);
     }
@@ -88,6 +57,15 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findByEmail(String email) {
         return null;
+    }
+
+    @Override
+    public void saveDoctor(User user) {
+        String password=passwordEncoder.encode(user.getPassword());
+        user.setPassword(password);
+        user.setRole("ROLE_DOCTOR");
+        userRepo.save(user);
+
     }
 
 
