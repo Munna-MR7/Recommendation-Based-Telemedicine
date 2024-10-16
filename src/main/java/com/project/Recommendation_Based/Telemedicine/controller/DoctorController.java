@@ -4,6 +4,7 @@ import com.project.Recommendation_Based.Telemedicine.entity.Doctor;
 import com.project.Recommendation_Based.Telemedicine.entity.DoctorRequest;
 import com.project.Recommendation_Based.Telemedicine.entity.User;
 import com.project.Recommendation_Based.Telemedicine.repository.UserRepo;
+import com.project.Recommendation_Based.Telemedicine.service.DoctorRequestService;
 import com.project.Recommendation_Based.Telemedicine.service.DoctorService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,11 +13,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.security.Principal;
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 public class DoctorController {
@@ -33,9 +33,18 @@ public class DoctorController {
 
     }
 
+    @PostMapping("/saveDoctor")
+    @ResponseBody
+    public String saveDoctor(@ModelAttribute Doctor doctor, HttpSession session, Model m) {
+
+
+        System.out.println(doctor);
+        doctorService.saveDoctor(doctor);
+        return "Success";
+    }
     @Autowired
     DoctorService doctorService;
-    @GetMapping("/user/allDoctor")
+    @GetMapping("/patient/allDoctor")
     public String getDoctors(Model model, HttpSession session){
         List<Doctor> doctors= doctorService.getDoctors();
         model.addAttribute("doctors", doctors);
@@ -49,11 +58,20 @@ public class DoctorController {
         return "doctorLists";
     }
 
-    @PostMapping("doctorRequest")
-    public String doctorRequest(@ModelAttribute DoctorRequest doctorRequest){
-        doctorService.saveDoctorRequest(doctorRequest);
-        return "successs";
+    @Autowired
+    private DoctorRequestService doctorRequestService;
 
+    @PostMapping("/doctorRequest")
+    @ResponseBody
+    public String doctorRequest(@ModelAttribute DoctorRequest doctorRequest){
+        doctorRequestService.saveDoctorRequest(doctorRequest);
+        return "Request Pending";
+
+    }
+
+    @GetMapping("/doctorLoginPage")
+    public String doctorLoginPage(){
+        return "doctorLogin";
     }
 
 }

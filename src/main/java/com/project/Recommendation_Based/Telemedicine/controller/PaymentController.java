@@ -2,12 +2,14 @@ package com.project.Recommendation_Based.Telemedicine.controller;
 
 import com.project.Recommendation_Based.Telemedicine.Config.CustomUser;
 import com.project.Recommendation_Based.Telemedicine.dto.PaymentRequest;
+import com.project.Recommendation_Based.Telemedicine.entity.Patient;
 import com.project.Recommendation_Based.Telemedicine.entity.Payment;
 import com.project.Recommendation_Based.Telemedicine.entity.User;
+import com.project.Recommendation_Based.Telemedicine.repository.PatientRepo;
 import com.project.Recommendation_Based.Telemedicine.repository.PaymentRepo;
 import com.project.Recommendation_Based.Telemedicine.repository.UserRepo;
 import com.project.Recommendation_Based.Telemedicine.service.PaymentService;
-import com.project.Recommendation_Based.Telemedicine.service.UserService;
+import com.project.Recommendation_Based.Telemedicine.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +23,7 @@ import java.security.Principal;
 import java.util.HashMap;
 import java.util.Map;
 @Controller
-@RequestMapping("/payment")
+@RequestMapping("/patient/payment")
 public class PaymentController {
 
 
@@ -60,9 +62,11 @@ public class PaymentController {
     }
 
     @Autowired
-    private UserService userService;
+    private PatientService userService;
     @Autowired
     private PaymentRepo paymentRepo;
+    @Autowired
+    private PatientRepo patientRepo;
 
     @PostMapping("/confirm")
     @ResponseBody
@@ -83,31 +87,28 @@ public class PaymentController {
 
         Object principal = authentication.getPrincipal();
         User loggedInUser;
+        Patient loggedInPatient;
 
         if (principal instanceof CustomUser) {
             // If principal is an instance of CustomUser, get the actual User entity
             loggedInUser = ((CustomUser) principal).getUser();
+            loggedInPatient= patientRepo.findByEmail(loggedInUser.getEmail());
+
             System.out.println("Yes: Instance");
         } else if (principal instanceof String) {
             // If principal is a String (email), fetch the user from the database
             String email = (String) principal;
-            loggedInUser = userRepo.findByEmail(email);
+            loggedInPatient = patientRepo.findByEmail(email);
             System.out.println("Yes: String " + email);
         } else {
             System.out.println("None");
             // Handle case when neither CustomUser nor String (should not happen)
             throw new IllegalStateException("Unexpected authentication principal type");
-
         }
-
         // Set the user in the payment entity
-        payment.setUser(loggedInUser);
-
+        payment.setPatient(loggedInPatient);
         // Now continue saving the payment, or any other business logic
         paymentRepo.save(payment);
-
-
-
         return "payment Success";
 
     }

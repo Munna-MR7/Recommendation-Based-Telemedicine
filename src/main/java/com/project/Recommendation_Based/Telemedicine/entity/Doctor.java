@@ -22,7 +22,4 @@ public class Doctor {
     private String Specialist;
     private String consultationFee;
     private String documents;
-
-
-
 }

@@ -1,6 +1,5 @@
 package com.project.Recommendation_Based.Telemedicine.service;
 
-import com.project.Recommendation_Based.Telemedicine.dto.UserDTO;
 import com.project.Recommendation_Based.Telemedicine.entity.Doctor;
 import com.project.Recommendation_Based.Telemedicine.entity.DoctorRequest;
 import com.project.Recommendation_Based.Telemedicine.entity.User;
@@ -55,5 +54,19 @@ public class DoctorServiceImpl implements DoctorService {
 
 
     }
+
+    @Override
+    public void saveDoctor(Doctor doctor) {
+        doctorRepo.save(doctor);
+    }
+
+//    @Override
+//    public void saveDoctor(User user) {
+//        String password=passwordEncoder.encode(user.getPassword());
+//        user.setPassword(password);
+//        user.setRole("ROLE_DOCTOR");
+//        userRepo.save(user);
+//
+//    }
 
 }

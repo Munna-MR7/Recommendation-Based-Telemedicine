@@ -11,7 +11,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "DoctorRequests")
+@Table(name = "DoctorRequestsTable")
 public class DoctorRequest {
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)

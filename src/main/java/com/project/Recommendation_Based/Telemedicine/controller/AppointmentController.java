@@ -5,7 +5,6 @@ import com.project.Recommendation_Based.Telemedicine.entity.Doctor;
 import com.project.Recommendation_Based.Telemedicine.entity.User;
 import com.project.Recommendation_Based.Telemedicine.repository.UserRepo;
 import com.project.Recommendation_Based.Telemedicine.service.AppointmentService;
-import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

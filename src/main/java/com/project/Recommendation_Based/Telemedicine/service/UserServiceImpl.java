@@ -1,6 +1,5 @@
 package com.project.Recommendation_Based.Telemedicine.service;
 
-import com.project.Recommendation_Based.Telemedicine.dto.UserDTO;
 import com.project.Recommendation_Based.Telemedicine.entity.User;
 import com.project.Recommendation_Based.Telemedicine.repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,16 +7,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-
-//import com.opencsv.CSVReader;
-//import com.opencsv.exceptions.CsvValidationException;
-//import com.sas.entity.User;
-//import com.sas.entity.Type;
-//import com.sas.entity.UserDOT;
-//import com.sas.repository.TypeRepository;
-//import com.sas.repository.UserRepository;
-
-
 import jakarta.servlet.http.HttpSession;
 
 @Service
@@ -29,12 +18,13 @@ public class UserServiceImpl implements UserService {
     private BCryptPasswordEncoder passwordEncoder;
 
     @Override
-    public User saveUser(User user) {
-
+    public void saveUser(User user) {
+        System.out.println(user.getPassword());
         String password=passwordEncoder.encode(user.getPassword());
+        //System.out.println("Encoded password: " + user.getPassword());
         user.setPassword(password);
-        user.setRole("ROLE_USER");
-        return userRepo.save(user);
+        //user.setRole("ROLE_USER");
+        userRepo.save(user);
 
     }
 
@@ -65,7 +55,6 @@ public class UserServiceImpl implements UserService {
         user.setPassword(password);
         user.setRole("ROLE_DOCTOR");
         userRepo.save(user);
-
     }
 
 

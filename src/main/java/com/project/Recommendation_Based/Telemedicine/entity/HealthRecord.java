@@ -21,7 +21,7 @@ public class HealthRecord {
     private String filePath;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    @JoinColumn(name = "patient_id")
+    private Patient patient;
 
 }

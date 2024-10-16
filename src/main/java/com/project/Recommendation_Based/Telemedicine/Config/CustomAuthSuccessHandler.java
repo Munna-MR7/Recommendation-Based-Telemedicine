@@ -36,7 +36,7 @@ public class CustomAuthSuccessHandler implements AuthenticationSuccessHandler {
             // Fallback: if no saved request, redirect to a default page (user home or admin home)
             Set<String> roles = AuthorityUtils.authorityListToSet(authentication.getAuthorities());
             if (roles.contains("ROLE_ADMIN")) {
-                response.sendRedirect("/admin/home");
+                response.sendRedirect("/");
             } else {
                 response.sendRedirect("/");
             }

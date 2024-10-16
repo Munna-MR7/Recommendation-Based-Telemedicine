@@ -1,6 +1,7 @@
 package com.project.Recommendation_Based.Telemedicine.service;
 import com.itextpdf.text.*;
 import com.project.Recommendation_Based.Telemedicine.entity.Appointment;
+import com.project.Recommendation_Based.Telemedicine.entity.Patient;
 import com.project.Recommendation_Based.Telemedicine.entity.User;
 import com.project.Recommendation_Based.Telemedicine.repository.AppointmentRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,8 +76,8 @@ public class AppointmentServiceImpl implements AppointmentService {
     }
 
     @Override
-    public List<Appointment> getUserAppointments(User  user) {
-        return appointmentRepo.findByUser(user);
+    public List<Appointment> getPatientAppointments(Patient patient) {
+        return appointmentRepo.findByPatient(patient);
     }
 
 

@@ -31,8 +31,8 @@ public class Appointment {
     private String paymentStatus;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    @JoinColumn(name = "patient_id")
+    private Patient patient;
 
     @ManyToOne
     @JoinColumn(name = "doctor_id")

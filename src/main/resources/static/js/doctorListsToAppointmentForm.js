@@ -8,7 +8,7 @@
 //        var doctorData = {
 //            name: cardBody.find('h4[name="name"]').text(),
 //            degrees: cardBody.find('h6[name="degrees"]').text(),
-//            designation: cardBody.find('p[name="designation"]').text(),
+//            specialist: cardBody.find('p[name="specialist"]').text(),
 //            consultationFee: cardBody.find('h6[name="consultationFee"]').text().replace('[Consultation Fee: ]', '')
 //        };
 //

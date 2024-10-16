@@ -40,7 +40,7 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable())  // Disable CSRF for simplicity
                 .authorizeHttpRequests(authorize -> {
-                    authorize.requestMatchers("/user/**").hasRole("USER");
+                    authorize.requestMatchers("/patient/**").hasRole("PATIENT");
                     authorize.requestMatchers("/admin/**").hasRole("ADMIN");
                     authorize.requestMatchers("/Appointment").authenticated();  // Protect Appointment
                     authorize.requestMatchers("/**").permitAll();
@@ -48,7 +48,7 @@ public class SecurityConfig {
                 .formLogin(formLogin -> formLogin
                         .loginPage("/signin")
                         .loginProcessingUrl("/userLogin")
-                        .loginProcessingUrl("/doctorLogin")
+                        //.loginProcessingUrl("/doctorLogin")
                         .successHandler(successHandler)  // Handle success
                         .permitAll()
                 )

@@ -15,12 +15,11 @@ public class Prescription {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
     private String medicineSummary;
     private String date;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    @JoinColumn(name = "patient_id")
+    private Patient patient;
 
 }

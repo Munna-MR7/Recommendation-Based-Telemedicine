@@ -51,7 +51,7 @@
                 </th:block>
                 <th:block th:if="${user}">
                    <div class="d-flex">
-                       <form action="Profile" method="get">
+                       <form action="patient/patientProfile" method="get">
                            <button class="btn btn-outline-primary fw-bold py-2 px-4">Profile</button>
                        </form>
                        <form th:action="@{/userLogout}" method="POST">
@@ -70,7 +70,7 @@
     </nav>
 </section>
 <!-- End navbar -->
-   
+
 
 <!-- Your main content goes here -->
 

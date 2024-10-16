@@ -7,13 +7,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import com.project.Recommendation_Based.Telemedicine.entity.User;
 import com.project.Recommendation_Based.Telemedicine.repository.UserRepo;
-import com.project.Recommendation_Based.Telemedicine.service.UserService;
+import com.project.Recommendation_Based.Telemedicine.service.PatientService;
 
 @Controller
 public class HomeController {
 
     @Autowired
-    private UserService userService;
+    private PatientService userService;
 
     @Autowired
     private UserRepo userRepo;

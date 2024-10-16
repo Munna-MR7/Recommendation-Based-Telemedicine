@@ -15,7 +15,7 @@
                 <div class="col-md-4 text-center">
                     <!-- Display Profile Picture -->
                     <img th:src="@{/uploads/Munna_profile.jpeg}" id="profile-pic" alt="Profile Picture" class="img-thumbnail" style="width: 150px; height: 150px;">
-                    <h3 th:text="${user.name}">John Doe</h3>
+                    <h3 th:text="${patient.name}">John Doe</h3>
 
                     <!-- Upload Profile Picture -->
 <!--                    <form method="POST" enctype="multipart/form-data" action="/uploadProfilePicture">-->
@@ -32,10 +32,10 @@
                 <div class="col-md-8">
                     <h3>User Information</h3>
                     <ul class="list-group mb-4">
-                        <li class="list-group-item"><strong>Email:</strong> <span th:text="${user.email}">john.doe@example.com</span></li>
-                        <li class="list-group-item"><strong>Phone:</strong> <span th:text="${user.phoneNumber}">+123456789</span></li>
-                        <li class="list-group-item"><strong>Date of Birth:</strong> <span th:text="${user.dateOfBirth}">01-01-1985</span></li>
-                        <li class="list-group-item"><strong>Address:</strong> <span th:text="${user.address}">123 Main St, City</span></li>
+                        <li class="list-group-item"><strong>Email:</strong> <span th:text="${patient.email}">john.doe@example.com</span></li>
+                        <li class="list-group-item"><strong>Phone:</strong> <span th:text="${patient.phoneNumber}">+123456789</span></li>
+                        <li class="list-group-item"><strong>Date of Birth:</strong> <span th:text="${patient.dateOfBirth}">01-01-1985</span></li>
+                        <li class="list-group-item"><strong>Address:</strong> <span th:text="${patient.address}">123 Main St, City</span></li>
                     </ul>
                 </div>
             </div>
@@ -45,7 +45,7 @@
                 <div class="col-md-12">
                     <h3>Health Records</h3>
                     <ul class="list-group">
-                        <li class="list-group-item" th:each="record : ${user.healthRecords}">
+                        <li class="list-group-item" th:each="record : ${patient.healthRecords}">
                             <strong th:text="${record.date}">01-01-2023</strong> - <span th:text="${record.description}">Blood Test</span>
                             <a href="" class="btn btn-sm btn-info float-right">Download</a>
 <!--                            th:href="@{'/downloadRecord/' + ${record.id}}"-->
@@ -69,7 +69,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:each="appointment : ${user.appointments}">
+                        <tr th:each="appointment : ${patient.appointments}">
                             <td th:text="${appointment.date}">01-02-2023</td>
                             <td th:text="${appointment.doctorName}">Dr. Jane Smith</td>
                             <td th:text="${appointment.status}">Completed</td>
@@ -93,9 +93,9 @@
                 <div class="col-md-12">
                     <h3>Assigned Doctors</h3>
                     <ul class="list-group">
-                        <li class="list-group-item" th:each="doctor : ${user.assignedDoctors}">
+                        <li class="list-group-item" th:each="doctor : ${patient.assignedDoctors}">
                             <strong th:text="${doctor.name}">Dr. Jane Smith</strong>
-                            <span th:text="'Specialty: ' + ${doctor.designation}"> - Cardiologist</span>
+                            <span th:text="'Specialty: ' + ${doctor.specialist}"> - Cardiologist</span>
                             <a href="#" class="btn btn-sm btn-info float-right">View Profile</a>
 <!--                            th:href="@{'/doctorProfile/' + ${doctor.id}}"-->
                         </li>
@@ -108,7 +108,7 @@
                 <div class="col-md-12">
                     <h3>Prescriptions</h3>
                     <ul class="list-group">
-                        <li class="list-group-item" th:each="prescription : ${user.prescriptions}">
+                        <li class="list-group-item" th:each="prescription : ${patient.prescriptions}">
                             <strong th:text="${prescription.date}">01-03-2023</strong> - <span th:text="${prescription.medicineSummary}">Paracetamol, Ibuprofen</span>
                             <a href="#" class="btn btn-sm btn-success float-right">Download Prescription</a>
 <!--                            th:href="@{'/downloadPrescription/' + ${prescription.id}}"-->

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{base::layout(~{::section})}">
+<head>
+    <meta charset="UTF-8">
+    <title>Pending Request</title>
+</head>
+<body>
+    <section>
+        <div class="container mt-5" style="min-height: 60vh;">
+            <h2 class="mb-4">Doctor Pending Requests</h2>
+
+            <!-- Success or error message -->
+            <div th:if="${msg != null}" class="alert alert-success" th:text="${msg}"></div>
+            <div th:if="${errorMsg != null}" class="alert alert-danger" th:text="${errorMsg}"></div>
+
+            <!-- Table for displaying pending doctor requests -->
+            <table class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                    <th>Doctor Name</th>
+                    <th>Email</th>
+                    <th>Specialization</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <!-- Loop through the list of pending doctor requests -->
+                <tr th:each="doctor : ${pendingDoctors}">
+                    <td th:text="${doctor.name}">Doctor Name</td>
+                    <td th:text="${doctor.email}">doctor@example.com</td>
+                    <td th:text="${doctor.specialist}">Specialization</td>
+                    <td>
+                        <!-- Accept Request button -->
+                        <form th:action="@{/admin/acceptDoctorRequest/{id}(id=${doctor.id})}" method="post" class="d-inline">
+                            <button type="submit" class="btn btn-success">Accept Request</button>
+                        </form>
+                        <!-- Delete Request button -->
+                        <form th:action="@{/admin/deleteDoctorRequest/{id}(id=${doctor.id})}" method="post" class="d-inline">
+                            <button type="submit" class="btn btn-danger">Delete Request</button>
+                        </form>
+                        <!-- View Details button -->
+                        <a th:href="@{/admin/viewDoctorDetails/{id}(id=${doctor.id})}" class="btn btn-info">View Details</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</body>
+</html>
