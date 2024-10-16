@@ -20,4 +20,14 @@ public class DoctorRequestServiceImpl implements DoctorRequestService{
     public List<DoctorRequest> showAllPendingRequest() {
         return doctorRequestRepo.findAll();
     }
+
+    @Override
+    public DoctorRequest searchDoctorById(Integer id) {
+        return doctorRequestRepo.findById(id).orElseThrow();
+    }
+
+    @Override
+    public void deleteDoctorRequest(Integer id) {
+        doctorRequestRepo.deleteById(id);
+    }
 }

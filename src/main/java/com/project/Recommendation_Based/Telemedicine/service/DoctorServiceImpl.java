@@ -1,8 +1,6 @@
 package com.project.Recommendation_Based.Telemedicine.service;
 
 import com.project.Recommendation_Based.Telemedicine.entity.Doctor;
-import com.project.Recommendation_Based.Telemedicine.entity.DoctorRequest;
-import com.project.Recommendation_Based.Telemedicine.entity.User;
 import com.project.Recommendation_Based.Telemedicine.repository.DoctorRepo;
 
 import com.project.Recommendation_Based.Telemedicine.repository.UserRepo;
@@ -14,7 +12,6 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class DoctorServiceImpl implements DoctorService {
@@ -30,8 +27,8 @@ public class DoctorServiceImpl implements DoctorService {
     }
 
 
-    public Optional<Doctor> searchDoctor(Integer id) {
-        return doctorRepo.findById(id);
+    public Doctor searchDoctor(Integer id) {
+        return doctorRepo.findById(id).orElseThrow();
     }
 
 
@@ -49,24 +46,18 @@ public class DoctorServiceImpl implements DoctorService {
         session.removeAttribute("msg");
     }
 
-    @Override
-    public void saveDoctorRequest(DoctorRequest doctorRequest) {
-
-
-    }
+//    @Override
+//    public void saveDoctorRequest(DoctorRequest doctorRequest) {
+//
+//
+//    }
 
     @Override
     public void saveDoctor(Doctor doctor) {
+        String password=passwordEncoder.encode(doctor.getPassword());
+        doctor.setPassword(password);
         doctorRepo.save(doctor);
-    }
 
-//    @Override
-//    public void saveDoctor(User user) {
-//        String password=passwordEncoder.encode(user.getPassword());
-//        user.setPassword(password);
-//        user.setRole("ROLE_DOCTOR");
-//        userRepo.save(user);
-//
-//    }
+    }
 
 }

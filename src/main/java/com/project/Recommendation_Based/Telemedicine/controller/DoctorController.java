@@ -6,14 +6,16 @@ import com.project.Recommendation_Based.Telemedicine.entity.User;
 import com.project.Recommendation_Based.Telemedicine.repository.UserRepo;
 import com.project.Recommendation_Based.Telemedicine.service.DoctorRequestService;
 import com.project.Recommendation_Based.Telemedicine.service.DoctorService;
+import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.List;
@@ -30,7 +32,6 @@ public class DoctorController {
             User user = userRepo.findByEmail(email);
             m.addAttribute("user", user);
         }
-
     }
 
     @PostMapping("/saveDoctor")
@@ -67,6 +68,21 @@ public class DoctorController {
         doctorRequestService.saveDoctorRequest(doctorRequest);
         return "Request Pending";
 
+    }
+
+    @GetMapping("/admin/{id}/documents")
+    public ResponseEntity<Resource> getDocument(@PathVariable int id) {
+        Doctor doctor = doctorService.searchDoctor(id);
+        String documentPath = doctor.getDocuments();
+
+        // Load the document as a Resource
+        Resource resource = (Resource) new FileSystemResource(documentPath);
+
+        // Set the response headers and return the resource
+        return ResponseEntity.ok()
+                .contentType(MediaType.APPLICATION_PDF)
+                .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=\"" + resource.name() + "\"")
+                .body(resource);
     }
 
     @GetMapping("/doctorLoginPage")

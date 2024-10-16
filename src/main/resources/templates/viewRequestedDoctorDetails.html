@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{base::layout(~{::section})}">
+<head>
+  <meta charset="UTF-8">
+  <title>Doctor Details</title>
+</head>
+<body>
+  <section>
+
+    <div class="container mt-5">
+      <h1>Doctor Registration Request Details</h1>
+
+      <!-- Display the doctor's details -->
+      <div class="card mt-4">
+        <div class="card-header">
+          <h2 th:text="${doctor.name}"></h2>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Details</h5>
+          <ul class="list-group">
+            <li class="list-group-item">
+              <strong>Email:</strong> <span th:text="${doctor.email}"></span>
+            </li>
+
+            <li class="list-group-item">
+              <strong>Phone:</strong> <span th:text="${doctor.phone}"></span>
+            </li>
+            <li class="list-group-item">
+              <strong>Gender:</strong> <span th:text="${doctor.gender}"></span>
+            </li>
+            <li class="list-group-item">
+              <strong>Specialization:</strong> <span th:text="${doctor.specialist}"></span>
+            </li>
+            <li class="list-group-item">
+              <strong>Consultation Fee:</strong> <span th:text="${doctor.consultationFee}"></span> years
+            </li>
+            <li class="list-group-item">
+              <strong>Address:</strong> <span th:text="${doctor.address}"></span>
+            </li>
+
+
+            <li class="list-group-item">
+              <strong>Registration Date:</strong> <span th:text="${doctor.registrationDate}"></span>
+            </li>
+            <li class="list-group-item">
+              <strong>Documents:</strong> <a th:href="@{/admin/{id}/documents(id=${doctor.id})}" target="_blank">View Document</a>
+            </li>
+
+          </ul>
+          <div class="mt-4">
+            <form th:action="@{/admin/acceptDoctorRequest/{id}(id=${doctor.id})}" method="post" class="d-inline">
+              <button type="submit" class="btn btn-success">Accept Request</button>
+            </form>
+            <!-- Delete Request button -->
+            <form th:action="@{/admin/deleteDoctorRequest/{id}(id=${doctor.id})}" method="post" class="d-inline">
+              <button type="submit" class="btn btn-danger">Delete Request</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <a href="/pendingRequest" class="btn btn-primary mt-4">Back to Pending Page</a>
+    </div>
+  </section>
+
+
+</body>
+</html>

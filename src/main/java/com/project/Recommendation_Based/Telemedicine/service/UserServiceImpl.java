@@ -23,9 +23,7 @@ public class UserServiceImpl implements UserService {
         String password=passwordEncoder.encode(user.getPassword());
         //System.out.println("Encoded password: " + user.getPassword());
         user.setPassword(password);
-        //user.setRole("ROLE_USER");
         userRepo.save(user);
-
     }
 
 
@@ -49,13 +47,13 @@ public class UserServiceImpl implements UserService {
         return null;
     }
 
-    @Override
-    public void saveDoctor(User user) {
-        String password=passwordEncoder.encode(user.getPassword());
-        user.setPassword(password);
-        user.setRole("ROLE_DOCTOR");
-        userRepo.save(user);
-    }
+//    @Override
+//    public void saveDoctor(User user) {
+//        String password=passwordEncoder.encode(user.getPassword());
+//        user.setPassword(password);
+//        user.setRole("ROLE_DOCTOR");
+//        userRepo.save(user);
+   // }
 
 
 }

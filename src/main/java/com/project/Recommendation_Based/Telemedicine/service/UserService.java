@@ -11,8 +11,4 @@ public interface UserService {
     public User getUserProfile(String email);
 
     User findByEmail(String email);
-
-    void saveDoctor(User user);
-
-
 }
