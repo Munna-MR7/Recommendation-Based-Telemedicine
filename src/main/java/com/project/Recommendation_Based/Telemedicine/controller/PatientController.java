@@ -3,6 +3,7 @@ package com.project.Recommendation_Based.Telemedicine.controller;
 import com.project.Recommendation_Based.Telemedicine.entity.Patient;
 import com.project.Recommendation_Based.Telemedicine.entity.User;
 import com.project.Recommendation_Based.Telemedicine.repository.PatientRepo;
+import com.project.Recommendation_Based.Telemedicine.repository.UserRepo;
 import com.project.Recommendation_Based.Telemedicine.service.*;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,15 +30,16 @@ public class PatientController {
 
     @Autowired
     private PatientRepo patientRepo;
+    @Autowired
+    private UserRepo userRepo;
 
     @ModelAttribute
     public void commonUser(Principal p, Model m) {
         if (p != null) {
             String email = p.getName();
-            Patient patient = patientRepo.findByEmail(email);
-            m.addAttribute("patient", patient);
+            User user = userRepo.findByEmail(email);
+            m.addAttribute("user", user);
         }
-
     }
 
     @PostMapping("/savePatient")

@@ -10,8 +10,8 @@
             <h2 class="mb-4">Doctor Pending Requests</h2>
 
             <!-- Success or error message -->
-            <div th:if="${msg != null}" class="alert alert-success" th:text="${msg}"></div>
-            <div th:if="${errorMsg != null}" class="alert alert-danger" th:text="${errorMsg}"></div>
+<!--            <div th:if="${msg != null}" class="alert alert-success" th:text="${msg}"></div>-->
+<!--            <div th:if="${errorMsg != null}" class="alert alert-danger" th:text="${errorMsg}"></div>-->
 
             <!-- Table for displaying pending doctor requests -->
             <table class="table table-bordered table-hover">
@@ -23,25 +23,23 @@
                     <th>Actions</th>
                 </tr>
                 </thead>
-                <tbody>
+                <tbody id="doctorRequestList">
                 <!-- Loop through the list of pending doctor requests -->
-                <tr th:each="doctor : ${pendingDoctors}">
-                    <td th:text="${doctor.name}">Doctor Name</td>
-                    <td th:text="${doctor.email}">doctor@example.com</td>
-                    <td th:text="${doctor.specialist}">Specialization</td>
-                    <td>
-                        <!-- Accept Request button -->
-                        <form th:action="@{/admin/acceptDoctorRequest/{id}(id=${doctor.id})}" method="post" class="d-inline">
-                            <button type="submit" class="btn btn-success">Accept Request</button>
-                        </form>
-                        <!-- Delete Request button -->
-                        <form th:action="@{/admin/deleteDoctorRequest/{id}(id=${doctor.id})}" method="post" class="d-inline">
-                            <button type="submit" class="btn btn-danger">Delete Request</button>
-                        </form>
-                        <!-- View Details button -->
-                        <a th:href="@{/admin/viewRequestedDoctorDetails/{id}(id=${doctor.id})}" class="btn btn-info">View Details</a>
-                    </td>
-                </tr>
+                    <tr th:each="doctor : ${pendingDoctors}">
+                        <td th:text="${doctor.name}">Doctor Name</td>
+                        <td th:text="${doctor.email}">doctor@example.com</td>
+                        <td th:text="${doctor.specialist}">Specialization</td>
+                        <td>
+                            <!-- Accept Request button -->
+                            <button class="btn btn-success accept-request-btn" th:data-id="${doctor.id}">Accept Request</button>
+
+                            <!-- delete Request button -->
+                            <button class="btn btn-danger delete-request-btn" th:data-id="${doctor.id}">Delete Request</button>
+
+                            <!-- View Details button -->
+                            <button class="btn btn-info viewRequestedDoctorDetails-btn" th:data-id="${doctor.id}">View Details</button>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
         </div>

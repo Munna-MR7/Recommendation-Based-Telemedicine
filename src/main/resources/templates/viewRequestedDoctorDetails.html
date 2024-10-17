@@ -6,7 +6,6 @@
 </head>
 <body>
   <section>
-
     <div class="container mt-5">
       <h1>Doctor Registration Request Details</h1>
 
@@ -48,18 +47,19 @@
 
           </ul>
           <div class="mt-4">
-            <form th:action="@{/admin/acceptDoctorRequest/{id}(id=${doctor.id})}" method="post" class="d-inline">
-              <button type="submit" class="btn btn-success">Accept Request</button>
-            </form>
-            <!-- Delete Request button -->
-            <form th:action="@{/admin/deleteDoctorRequest/{id}(id=${doctor.id})}" method="post" class="d-inline">
-              <button type="submit" class="btn btn-danger">Delete Request</button>
-            </form>
+<!--            <div class="d-inline">-->
+<!--              <button class="btn btn-success accept-request-btn" th:data-id="${doctor.id}">Accept Request</button>-->
+<!--            </div>-->
+<!--            &lt;!&ndash; Delete Request button &ndash;&gt;-->
+<!--            <div  class="d-inline">-->
+<!--              <button class="btn btn-danger delete-request-btn" th:data-id="${doctor.id}">Delete Request</button>-->
+<!--            </div>-->
+            <div>
+              <a href="/admin/pendingRequest" class="btn btn-primary mt-4 mb-5">Back to Pending Page</a>
+            </div>
           </div>
         </div>
       </div>
-
-      <a href="/pendingRequest" class="btn btn-primary mt-4">Back to Pending Page</a>
     </div>
   </section>
 
