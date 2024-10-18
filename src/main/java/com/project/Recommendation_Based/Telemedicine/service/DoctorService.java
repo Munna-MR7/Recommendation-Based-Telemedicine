@@ -18,6 +18,8 @@ public interface DoctorService {
 
     void saveDoctor(Doctor doctor);
 
+    Doctor getDoctorByEmail(String email);
+
 
 
     //void saveStudent(UserDTO user);

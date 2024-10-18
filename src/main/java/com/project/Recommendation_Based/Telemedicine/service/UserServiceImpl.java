@@ -26,8 +26,6 @@ public class UserServiceImpl implements UserService {
         userRepo.save(user);
     }
 
-
-
     @Override
     public void removeSessionMessage() {
 
@@ -38,22 +36,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getUserProfile(String email) {
+    public User getUserProfileByEmail(String email) {
         return userRepo.findByEmail(email);
     }
-
-    @Override
-    public User findByEmail(String email) {
-        return null;
-    }
-
-//    @Override
-//    public void saveDoctor(User user) {
-//        String password=passwordEncoder.encode(user.getPassword());
-//        user.setPassword(password);
-//        user.setRole("ROLE_DOCTOR");
-//        userRepo.save(user);
-   // }
-
 
 }

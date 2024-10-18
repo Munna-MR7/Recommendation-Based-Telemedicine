@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{base::layout(~{::section})}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Profile</title>
+    <!-- Additional styles for this specific page can go here -->
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <section>
+        <!-- Sidebar and Content Layout -->
+        <div class="container-fluid">
+            <div class="row">
+                <!-- Sidebar for Doctor Profile Features -->
+                <div class="col-md-3 sidebar py-4">
+                    <h5 class="text-center">Doctor Panel</h5>
+                    <ul>
+                        <li><a href="#">Profile</a></li>
+                        <li><a href="#">Electronic Health Records</a></li>
+                        <li><a href="#">Previous Visits</a></li>
+                        <li><a href="#">Prescriptions</a></li>
+                        <li><a href="#">Upcoming Appointments</a></li>
+                        <li><a href="#">Scheduling Tools</a></li>
+                        <li><a href="#">Document Scanning & Sharing</a></li>
+                    </ul>
+                </div>
+
+                <!-- Main Content Section for Doctor Profile -->
+                <div class="col-md-9 main-content">
+                    <h2>Doctor Profile</h2>
+                    <!--            <p><strong>Specialty:</strong> <span th:text="${doctor.specialty}">[Doctor's Specialty]</span></p>-->
+                    <!--            <p><strong>Experience:</strong> <span th:text="${doctor.experience}">[Doctor's Experience]</span> years</p>-->
+                    <!--            <p><strong>Fees:</strong> <span th:text="${doctor.fees}">$[Doctor's Fees]</span></p>-->
+                    <!--            <p><strong>Accepted Insurance:</strong> <span th:text="${doctor.insuranceTypes}">[Accepted Insurance Types]</span></p>-->
+
+                    <!-- Example section for appointments -->
+                    <h4 class="mt-4">Appointments</h4>
+                    <!--            <div th:each="appointment : ${appointments}">-->
+                    <!--                <p>Appointment with <span th:text="${appointment.patientName}"></span> on <span th:text="${appointment.date}"></span></p>-->
+                    <!--            </div>-->
+                </div>
+            </div>
+        </div>
+
+    </section>
+</body>
+
+</html>

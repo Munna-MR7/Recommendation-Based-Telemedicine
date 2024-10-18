@@ -37,7 +37,6 @@ public class AdminController {
     private DoctorRequestService doctorRequestService;
     @GetMapping("/pendingRequest")
     public String pendingRequst(Model model){
-
         List<DoctorRequest> pendingDoctors= doctorRequestService.showAllPendingRequest();
         model.addAttribute("pendingDoctors", pendingDoctors);
         return "pendingRequest";
@@ -55,15 +54,14 @@ public class AdminController {
 
         DoctorRequest doctorRequest = doctorRequestService.searchDoctorById(id);
 
-        Doctor doctor = getDoctor(doctorRequest);
 
-        doctorService.saveDoctor(doctor);
+        doctorService.saveDoctor(getDoctor(doctorRequest));
 
         User user=new User();
         user.setName(doctorRequest.getName());
         user.setEmail(doctorRequest.getEmail());
         user.setPassword(doctorRequest.getPassword());
-        user.setRole("ROLL_DOCTOR");
+        user.setRole("ROLE_DOCTOR");
         userService.saveUser(user);
 
         doctorRequestService.deleteDoctorRequest(id);

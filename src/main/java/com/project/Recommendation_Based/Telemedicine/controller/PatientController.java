@@ -1,5 +1,6 @@
 package com.project.Recommendation_Based.Telemedicine.controller;
 
+import com.project.Recommendation_Based.Telemedicine.entity.Doctor;
 import com.project.Recommendation_Based.Telemedicine.entity.Patient;
 import com.project.Recommendation_Based.Telemedicine.entity.User;
 import com.project.Recommendation_Based.Telemedicine.repository.PatientRepo;
@@ -14,11 +15,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import java.security.Principal;
+import java.util.Objects;
 
 @Controller
 public class PatientController {
     @Autowired
     private PatientService patientService;
+    @Autowired
+    private DoctorService doctorService;
     @Autowired
     private UserService userService;
     @Autowired
@@ -72,24 +76,38 @@ public class PatientController {
         return "Register successfully";
     }
 
-
-
-    @GetMapping("/patient/patientProfile")
+    @GetMapping("/Profile")
     public String viewProfile(Model model, Principal principal) {
         // Fetch the logged-in user's email
         String email = principal.getName();
+        //System.out.println("User email: "+ email);
 
-        // Fetch the user's profile data
-        Patient patient = patientService.getPatientProfile(email);
+        User user = userService.getUserProfileByEmail(email);
+        //System.out.println("User details: "+user);
+        System.out.println("User role: "+user.getRole());
+        if(Objects.equals(user.getRole(), "ROLE_PATIENT")){
+            Patient patient = patientService.getPatientProfile(email);
 
-        // Add user data to the model
-        model.addAttribute("patient", patient);
-        model.addAttribute("appointments", appointmentService.getPatientAppointments(patient));
-        model.addAttribute("healthRecords", healthRecordService.getPatientHealthRecords(patient));
-        model.addAttribute("prescriptions", prescriptionService.getPatientPrescriptions(patient));
-
-        // Return the profile view
-        return "patientProfile";
+            // Add user data to the model
+            model.addAttribute("patient", patient);
+            model.addAttribute("appointments", appointmentService.getPatientAppointments(patient));
+            model.addAttribute("healthRecords", healthRecordService.getPatientHealthRecords(patient));
+            model.addAttribute("prescriptions", prescriptionService.getPatientPrescriptions(patient));
+            return "patientProfile";
+        }
+        else if(Objects.equals(user.getRole(), "ROLE_DOCTOR")){
+            Doctor doctor = doctorService.getDoctorByEmail(email);
+            model.addAttribute("doctor", doctor);
+//            model.addAttribute("appointments", appointmentService.getPatientAppointments(doctor));
+//            model.addAttribute("healthRecords", healthRecordService.getPatientHealthRecords(doctor));
+//            model.addAttribute("prescriptions", prescriptionService.getPatientPrescriptions(doctor));
+            return "doctorProfile";
+        }
+        else if (user.getRole().equals("ROLE_ADMIN")) {
+            return "adminProfile";
+        } else {
+            return "index";
+        }
     }
 
 }

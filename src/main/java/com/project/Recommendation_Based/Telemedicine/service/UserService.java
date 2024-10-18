@@ -8,7 +8,6 @@ public interface UserService {
 
     public void removeSessionMessage();
 
-    public User getUserProfile(String email);
+    public User getUserProfileByEmail(String email);
 
-    User findByEmail(String email);
 }

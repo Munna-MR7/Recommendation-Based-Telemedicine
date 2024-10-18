@@ -60,4 +60,9 @@ public class DoctorServiceImpl implements DoctorService {
 
     }
 
+    @Override
+    public Doctor getDoctorByEmail(String email) {
+        return doctorRepo.findByEmail(email);
+    }
+
 }

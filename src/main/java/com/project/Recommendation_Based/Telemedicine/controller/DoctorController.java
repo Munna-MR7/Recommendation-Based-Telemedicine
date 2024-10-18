@@ -38,7 +38,6 @@ public class DoctorController {
     @ResponseBody
     public String saveDoctor(@ModelAttribute Doctor doctor, HttpSession session, Model m) {
 
-
         System.out.println(doctor);
         doctorService.saveDoctor(doctor);
         return "Success";
