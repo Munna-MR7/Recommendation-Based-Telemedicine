@@ -14,9 +14,9 @@ public interface AppointmentService {
     public Appointment saveAppointment(Appointment appointment);
     public Appointment getAppointmentById(Integer appointmentId);
     public ByteArrayInputStream generateAppointmentReceipt(Appointment appointment) throws DocumentException, IOException;
-    //List<Appointment> getUserAppointments(User user);
 
     List<Appointment> getPatientAppointments(Patient patient);
+
     //public String setPaymentStatus(String paymentStatus);
 
 }

@@ -80,8 +80,6 @@ public class AppointmentServiceImpl implements AppointmentService {
         return appointmentRepo.findByPatient(patient);
     }
 
-
-
 }
 
 

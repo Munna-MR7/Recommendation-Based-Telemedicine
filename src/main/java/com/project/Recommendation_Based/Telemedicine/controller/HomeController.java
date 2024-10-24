@@ -37,6 +37,9 @@ public class HomeController {
     @GetMapping("/signin")
     public String login() { return "login";}
 
+    @GetMapping("/videoCall")
+    public String videoCall() { return "videocall";}
+
     @GetMapping("/admin/home")
     public String homeAd(){
         return "home";

@@ -8,17 +8,30 @@
 </head>
 <body>
 <section>
-    <div class="col py-3">
-        <h3>Left Sidebar with Submenus</h3>
-        <p class="lead">
-        <h1>Okk! Working.........</h1>
-        <ul class="list-unstyled">
-            <li><h5>Responsive</h5> shrinks in width, hides text labels, and collapses to icons only on mobile</li>
-        </ul>
+<!--    <div class="col py-3">-->
+<!--        <h3>Left Sidebar with Submenus</h3>-->
+<!--        <p class="lead">-->
+<!--        <h1>Okk! Working.........</h1>-->
+<!--        <ul class="list-unstyled">-->
+<!--            <li><h5>Responsive</h5> shrinks in width, hides text labels, and collapses to icons only on mobile</li>-->
+<!--        </ul>-->
+<!--    </div>-->
+<!--    <button class="btn btn-primary" id="newMeetingBtn">Create Calling Room</button>-->
+
+
+    <div id="callContainer">
+        <video id="localVideo" autoplay muted></video> <!-- Doctor's video -->
+        <video id="remoteVideo" autoplay></video> <!-- Patient's video -->
+
+        <button onclick="mutePatient(patientStreamID)">Mute Patient</button>
+        <button onclick="unmutePatient(patientStreamID)">Unmute Patient</button>
+        <button onclick="rejectPatient(patientStreamID)">Reject Patient</button>
     </div>
-    <BUTTON th:action="newCall" Method="GET" class="btn btn-primary">Create Calling Room</BUTTON>
 
-
+    <script>
+        // Assume the call initialization happens here
+        initCall('doctor-room-123', 'doctor123');  // Call doctor-specific room
+    </script>
 
 </section>
 </body>
