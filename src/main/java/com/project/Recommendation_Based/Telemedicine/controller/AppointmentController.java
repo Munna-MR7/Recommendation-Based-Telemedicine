@@ -1,11 +1,18 @@
 package com.project.Recommendation_Based.Telemedicine.controller;
 
+import com.project.Recommendation_Based.Telemedicine.Config.CustomUser;
 import com.project.Recommendation_Based.Telemedicine.entity.Appointment;
 import com.project.Recommendation_Based.Telemedicine.entity.Doctor;
+import com.project.Recommendation_Based.Telemedicine.entity.Patient;
 import com.project.Recommendation_Based.Telemedicine.entity.User;
+import com.project.Recommendation_Based.Telemedicine.repository.DoctorRepo;
+import com.project.Recommendation_Based.Telemedicine.repository.PatientRepo;
+import com.project.Recommendation_Based.Telemedicine.repository.PaymentRepo;
 import com.project.Recommendation_Based.Telemedicine.repository.UserRepo;
 import com.project.Recommendation_Based.Telemedicine.service.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +27,7 @@ import org.springframework.http.ResponseEntity;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.security.Principal;
+import java.util.Optional;
 
 
 @Controller
@@ -53,10 +61,51 @@ public class AppointmentController {
         return "doctorAppointment";
     }
 
+    @Autowired
+    private PatientRepo patientRepo;
+    @Autowired
+    private DoctorRepo doctorRepo;
     @PostMapping("/makeAppointment")
-    public String submitAppointmentForm(@ModelAttribute Appointment appointment, RedirectAttributes ra, Model model) {
+    public String submitAppointmentForm(@ModelAttribute Appointment appointment, RedirectAttributes ra, Model model,@RequestParam("doctorId") int doctorId ) {
+
+        System.out.println("++++++++++++++++++++++++++>>>>>>>>>>>"+doctorId);
+        Optional<Doctor> doctorOptional=doctorRepo.findById(doctorId);
+        if (doctorOptional.isPresent()) {
+        Doctor doc = doctorOptional.get();
+        appointment.setDoctor(doc);}
+
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        Object principal = authentication.getPrincipal();
+        User loggedInUser;
+        Patient loggedInPatient;
+
+        if (principal instanceof CustomUser) {
+            // If principal is an instance of CustomUser, get the actual User entity
+            loggedInUser = ((CustomUser) principal).getUser();
+            loggedInPatient= patientRepo.findByEmail(loggedInUser.getEmail());
+
+            System.out.println("Yes: Instance");
+        } else if (principal instanceof String) {
+            // If principal is a String (email), fetch the user from the database
+            String email = (String) principal;
+            loggedInPatient = patientRepo.findByEmail(email);
+            System.out.println("Yes: String " + email);
+        } else {
+            System.out.println("None");
+            // Handle case when neither CustomUser nor String (should not happen)
+            throw new IllegalStateException("Unexpected authentication principal type");
+        }
+        // Set the user in the payment entity
+        appointment.setPatient(loggedInPatient);
+        appointment.setVisitStatus("Unvisited");
+        // After finding the doctor entity
+       // Optional<Doctor> doctor = doctorRepo.findById(appointment.getDoctorId());
+       //doctor.ifPresent(appointment::setDoctor);
 
         appointmentService.saveAppointment(appointment);
+
         model.addAttribute("appointment", appointment);
         //ra.addFlashAttribute("msg", "Congratulations! You made an appointment.");
         return "appointmentSuccess";

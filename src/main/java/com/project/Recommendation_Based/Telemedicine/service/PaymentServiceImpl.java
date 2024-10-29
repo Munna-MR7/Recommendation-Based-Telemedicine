@@ -36,9 +36,9 @@ public class PaymentServiceImpl implements PaymentService {
         parameters.put("total_amount", String.valueOf(paymentRequest.getAmount()));
         parameters.put("currency", "BDT");
         parameters.put("tran_id", UUID.randomUUID().toString());  // Unique transaction ID
-        parameters.put("success_url", "http://localhost:8080/payment/confirm?status=success");
-        parameters.put("fail_url", "http://localhost:8080/payment/confirm?status=failed");
-        parameters.put("cancel_url", "http://localhost:8080/payment/confirm?status=canceled");
+        parameters.put("success_url", "http://localhost:8080/patient/payment/confirm?status=success");
+        parameters.put("fail_url", "http://localhost:8080/patient/payment/confirm?status=failed");
+        parameters.put("cancel_url", "http://localhost:8080/patient/payment/confirm?status=canceled");
         parameters.put("cus_name", paymentRequest.getCustomerName());
         parameters.put("cus_email", paymentRequest.getCustomerEmail());
         parameters.put("cus_phone", paymentRequest.getCustomerPhone());

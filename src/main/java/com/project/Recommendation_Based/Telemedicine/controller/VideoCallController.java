@@ -1,40 +1,34 @@
 package com.project.Recommendation_Based.Telemedicine.controller;
-
-import com.project.Recommendation_Based.Telemedicine.service.ZegoCloudService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.project.Recommendation_Based.Telemedicine.dto.SignalMessage;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
-@RequestMapping("/video")
 public class VideoCallController {
 
-    @Autowired
-    private ZegoCloudService zegoCloudService;
-
-    @GetMapping("/room") ///{doctorId}
-    public String createRoomForDoctor(Model model){ //(@PathVariable Integer id, Model model) {
-        String roomId = "doctor_" + 5;
-        zegoCloudService.createRoom(roomId).subscribe();  // Asynchronous request
-        model.addAttribute("roomId", roomId);
-        model.addAttribute("doctorId", 5);
-
-        return "videoCall";
+    @MessageMapping("/join/{roomId}")
+    @SendTo("/topic/join/{roomId}")
+    public SignalMessage joinRoom(SignalMessage message, @PathVariable String roomId) {
+        return message; // Notify others of new join
     }
 
-    @PostMapping("/join")
-    public String joinCall(@RequestParam Integer id, @RequestParam String roomId, Model model) {
-        String userId=Integer.toString(id);
-        zegoCloudService.joinRoom(userId, roomId).subscribe();  // Asynchronous request
-        model.addAttribute("roomId", roomId);
-        model.addAttribute("userId", userId);
-        return "redirect:/video/room/" + roomId;
+    @MessageMapping("/offer/{roomId}")
+    @SendTo("/topic/offer/{roomId}")
+    public SignalMessage sendOffer(SignalMessage message, @PathVariable String roomId) {
+        return message;
     }
 
-    @PostMapping("/leave")
-    public String leaveCall(@RequestParam String userId, @RequestParam String roomId) {
-        zegoCloudService.leaveRoom(userId, roomId).subscribe();  // Asynchronous request
-        return "redirect:/video/room/" + roomId;
+    @MessageMapping("/answer/{roomId}")
+    @SendTo("/topic/answer/{roomId}")
+    public SignalMessage sendAnswer(SignalMessage message, @PathVariable String roomId) {
+        return message;
+    }
+
+    @MessageMapping("/ice/{roomId}")
+    @SendTo("/topic/ice/{roomId}")
+    public SignalMessage sendIceCandidate(SignalMessage message, @PathVariable String roomId) {
+        return message;
     }
 }

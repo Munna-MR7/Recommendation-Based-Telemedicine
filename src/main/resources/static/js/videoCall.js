@@ -1,24 +1,43 @@
-const appID = 1572906346;
-    const serverSecret = '3e1e0b4aa66f275c7473641033ce5ca8';
-    const roomID = /*[[${roomId}]]*/ 'default_room';
-    const userID = /*[[${doctorId}]]*/ 'doctor';
+const socket = new WebSocket("ws://localhost:8080/ws");
 
-    let zg = new ZegoExpressEngine(appID, serverSecret);
-    let localStream;
+socket.addEventListener('open', () => {
+    socket.send(JSON.stringify({ type: "joinRoom", roomId: roomId }));
+});
 
-    document.getElementById('startCall').onclick = async () => {
-        await zg.loginRoom(roomID, { userID: userID, userName: 'Doctor' });
-        localStream = await zg.createStream();
-        document.getElementById('localVideo').srcObject = localStream;
-        zg.startPublishingStream(roomID, localStream);
-    };
+// WebRTC peer connection setup, similar to your existing code
+// Send and receive offers, answers, and ICE candidates over the WebSocket connection
+socket.addEventListener("message", (event) => {
+    const data = JSON.parse(event.data);
 
-    document.getElementById('endCall').onclick = () => {
-        zg.stopPublishingStream(roomID);
-        zg.leaveRoom(roomID);
-    };
+    if (data.type === "newJoining") {
+        makeOffer();
+    } else if (data.type === "offer") {
+        handleOffer(data.offer);
+    } else if (data.type === "answer") {
+        handleAnswer(data.answer);
+    } else if (data.type === "iceCandidate") {
+        handleIceCandidate(data.candidate);
+    }
+});
 
-    document.getElementById('muteButton').onclick = () => {
-        const isMuted = localStream.getAudioTracks()[0].enabled;
-        localStream.getAudioTracks()[0].enabled = !isMuted;
-    };
+function makeOffer() {
+    // Create and send offer
+    // socket.send(JSON.stringify({ type: "offer", offer, roomId }));
+    const offer = await peerConnection.createOffer();
+    peerConnection.setLocalDescription(offer);
+    socket.emit('makeOffer', offer, roomId)
+}
+
+function handleOffer(offer) {
+    // Handle received offer and send answer
+}
+
+function handleAnswer(answer) {
+    // Handle received answer
+}
+
+function handleIceCandidate(candidate) {
+    // Add ICE candidate to peer connection
+}
+
+// Other WebRTC and UI handling logic

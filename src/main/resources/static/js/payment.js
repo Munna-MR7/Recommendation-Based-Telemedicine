@@ -25,11 +25,10 @@ $(document).ready(function () {
                     customerEmail: "john.doe@example.com",
                     customerPhone: "017xxxxxxxx",
                     amount: 800.00
-
                 };
 
                 $.ajax({
-                    url: '/payment/initiate',
+                    url: '/patient/payment/initiate',
                     type: 'POST',
                     contentType: 'application/json',
                     data: JSON.stringify(paymentRequest),

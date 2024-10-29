@@ -3,7 +3,6 @@ package com.project.Recommendation_Based.Telemedicine.service;
 import com.itextpdf.text.DocumentException;
 import com.project.Recommendation_Based.Telemedicine.entity.Appointment;
 import com.project.Recommendation_Based.Telemedicine.entity.Patient;
-import com.project.Recommendation_Based.Telemedicine.entity.User;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -16,6 +15,8 @@ public interface AppointmentService {
     public ByteArrayInputStream generateAppointmentReceipt(Appointment appointment) throws DocumentException, IOException;
 
     List<Appointment> getPatientAppointments(Patient patient);
+
+    List<Appointment> showPendingAppointments(int doctorId);
 
     //public String setPaymentStatus(String paymentStatus);
 

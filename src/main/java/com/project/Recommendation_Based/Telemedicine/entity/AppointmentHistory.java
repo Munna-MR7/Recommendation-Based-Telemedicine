@@ -6,13 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@Getter
-@Setter
-@Entity
-@Table(name = "Appointments")
-public class Appointment {
+public class AppointmentHistory {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -20,17 +15,14 @@ public class Appointment {
     private String email;
     private String phoneNumber;
     private String age;
-
     private String gender;
     private String address;
     private String MedicalReport;
-    //private int doctorId;
     private String doctorName;
     private String appointmentDate;
     private String appointmentTime;
     private String consultationFee;
     private String paymentStatus;
-    private String visitStatus;
 
     @ManyToOne
     @JoinColumn(name = "patient_id")
@@ -39,5 +31,7 @@ public class Appointment {
     @ManyToOne
     @JoinColumn(name = "doctor_id")
     private Doctor doctor;
-
 }
+
+
+

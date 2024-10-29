@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{base::layout(~{::section})}">
+<head>
+    <meta charset="UTF-8">
+    <title>Pending Request</title>
+</head>
+<body>
+<section>
+    <div class="container mt-5" style="min-height: 60vh;">
+        <h2 class="mb-4">pending Appointments</h2>
+
+        <!-- Success or error message -->
+        <!--            <div th:if="${msg != null}" class="alert alert-success" th:text="${msg}"></div>-->
+        <!--            <div th:if="${errorMsg != null}" class="alert alert-danger" th:text="${errorMsg}"></div>-->
+
+        <!-- Table for displaying pending doctor requests -->
+        <table class="table table-bordered table-hover">
+            <thead>
+            <tr>
+                <th>Patient Name</th>
+                <th>Age</th>
+                <th>Phone Number</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody id="pendingAppointments">
+            <!-- Loop through the list of pending doctor requests -->
+            <tr th:each="appointment : ${appointments}">
+                <td th:text="${appointment.patientName}">Patient Name</td>
+                <td th:text="${appointment.age}">patient@example.com</td>
+                <td th:text="${appointment.phoneNumber}">phone Number</td>
+                <td>
+                    <!-- Accept Request button -->
+                    <button class="btn btn-success view-appointment-btn" th:data-id="${appointment.id}">View Details</button>
+
+                    <!-- delete Request button -->
+                    <button class="btn btn-danger call-patient-btn" th:data-id="${appointment.id}">Call Patient</button>
+
+                    <!-- View Details button -->
+                    <button class="btn btn-info mark-visited-btn" th:data-id="${appointment.id}">Mark Visited</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+</body>
+</html>
