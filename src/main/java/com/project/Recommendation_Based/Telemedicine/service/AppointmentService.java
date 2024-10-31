@@ -16,7 +16,9 @@ public interface AppointmentService {
 
     List<Appointment> getPatientAppointments(Patient patient);
 
-    List<Appointment> showPendingAppointments(int doctorId);
+    public List<Appointment> showPendingPatients(int doctorId);
+
+    List<Appointment> showPendingAppointments(int patientId);
 
     //public String setPaymentStatus(String paymentStatus);
 

@@ -15,7 +15,10 @@ public interface AppointmentRepo extends JpaRepository<Appointment, Integer> {
     List<Appointment> findByPatient(Patient patient);
 
     @Query("SELECT a FROM Appointment a WHERE a.doctor.id = :doctorId AND a.visitStatus = 'Unvisited'")
-    List<Appointment> findUnvisitedAppointmentByDoctorid(@Param("doctorId") int doctorId);
+    List<Appointment> findUnvisitedAppointmentByDoctorId(@Param("doctorId") int doctorId);
+
+    @Query("SELECT a FROM Appointment a WHERE a.patient.id = :patientId AND a.visitStatus = 'Unvisited'")
+    List<Appointment> findUnvisitedAppointmentByPatientId(@Param("patientId") int patientId);
 
     //String setPaymentStatus(String paymentStatus);
 }

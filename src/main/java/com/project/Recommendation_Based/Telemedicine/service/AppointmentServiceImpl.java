@@ -80,8 +80,13 @@ public class AppointmentServiceImpl implements AppointmentService {
     }
 
     @Override
-    public List<Appointment> showPendingAppointments(int doctorId) {
-        return appointmentRepo.findUnvisitedAppointmentByDoctorid(doctorId);
+    public List<Appointment> showPendingPatients(int doctorId) {
+        return appointmentRepo.findUnvisitedAppointmentByDoctorId(doctorId);
+    }
+
+    @Override
+    public List<Appointment> showPendingAppointments(int patientId) {
+        return appointmentRepo.findUnvisitedAppointmentByPatientId(patientId);
     }
 
 }
