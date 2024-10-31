@@ -1,6 +1,7 @@
 package com.project.Recommendation_Based.Telemedicine.service;
 
 import com.project.Recommendation_Based.Telemedicine.entity.Patient;
+import com.project.Recommendation_Based.Telemedicine.entity.User;
 import com.project.Recommendation_Based.Telemedicine.repository.PatientRepo;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,7 +46,7 @@ public class PatientServiceImpl implements PatientService {
     }
 
     @Override
-    public Patient findByEmail(String email) {
+    public User findByEmail(String email) {
         return null;
     }
 

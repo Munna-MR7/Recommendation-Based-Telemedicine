@@ -51,14 +51,11 @@
                     <h6 th:text="${d.consultationFee}" name="consultationFee" class="text-primary fw-bold" >[Consultation Fee: ]</h6>
                   </div>
 
-
-
-
-
-
                   <div>
                     <form action="Appointment" method="POST">
-                       <!---------------------   Instead sending from the Ajax call, Using Form    --------------------->
+                      <!---------------------   Instead sending from the Ajax call, Using Form    --------------------->
+
+                      <input type="hidden" name="id" th:value="${d.id}"/>
                       <input type="hidden" name="name" th:value="${d.name}"/>
                       <input type="hidden" name="degrees" th:value="${d.degrees}"/>
                       <input type="hidden" name="specialist" th:value="${d.specialist}"/>

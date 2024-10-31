@@ -33,16 +33,17 @@
                     <!-- Accept Request button -->
                     <button class="btn btn-success view-appointment-btn" th:data-id="${appointment.id}">View Details</button>
 
-                    <!-- delete Request button -->
-                    <button class="btn btn-danger call-patient-btn" th:data-id="${appointment.id}">Call Patient</button>
-
                     <!-- View Details button -->
                     <button class="btn btn-info mark-visited-btn" th:data-id="${appointment.id}">Mark Visited</button>
+
+                    <!-- delete Request button -->
+                    <button class="btn btn-danger call-patient-btn newMeetingBtn"  th:data-id="${appointment.id}">Call asdfjlkhasd Patient</button>
                 </td>
             </tr>
             </tbody>
         </table>
     </div>
 </section>
+<script src="/js/videoCall.js"></script>
 </body>
 </html>

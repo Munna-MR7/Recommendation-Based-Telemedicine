@@ -125,7 +125,7 @@ public class DoctorController {
 
 
         int doctorId=loggedInDoctor.getId();
-        System.out.println("Doctor Is: "+doctorId);
+        //System.out.println("Doctor Is: "+doctorId);
         List<Appointment> appointments= appointmentService.showPendingAppointments(doctorId);
         model.addAttribute("appointments", appointments);
         return "pendingAppointments";

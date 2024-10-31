@@ -1,18 +1,52 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{doctorSidebar::layout(~{::section})}">
 <head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>WebRTC Room</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"/>
-    <style> /* Your CSS styling here */ </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connected Users</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
-<div id="video_grid"></div>
-<div id="options"> <!-- Add controls here --> </div>
-<script>
-    const roomId = [[${roomId}]];
-</script>
-<script src="/js/videoCall.js"></script>
+    <section>
+        <div class="container mt-5" style="min-height: 60vh;">
+            <h2 class="mb-4">pending Appointments</h2>
+            <table class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                    <th>Patient Name</th>
+                    <th>Age</th>
+                    <th>Phone Number</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody id="pendingAppointments">
+                <!-- Loop through the list of pending doctor requests -->
+                <tr th:each="appointment : ${appointments}">
+                    <td th:text="${appointment.patientName}">Patient Name</td>
+                    <td th:text="${appointment.age}">patient@example.com</td>
+                    <td th:text="${appointment.phoneNumber}">phone Number</td>
+                    <td>
+                        <!-- View Details button -->
+                        <button class="btn btn-success view-appointment-btn" th:data-id="${appointment.id}">View Details</button>
+
+                        <!-- Mark Visited button -->
+                        <button class="btn btn-info mark-visited-btn" th:data-id="${appointment.id}">Mark Visited</button>
+                </tr>
+                </tbody>
+            </table>
+            <div class="new-meeting">
+                <button id="newMeetingBtn" class="btn btn-danger">Create a Consultation Room</button>
+                <div class="join-meeting">
+                    <input type="hidden" id="meetingId"/>
+                    <button id="joinMeetingBtn">Join</button>
+                </div>
+            </div>
+        </div>
+
+
+    </section>
+
 </body>
 </html>

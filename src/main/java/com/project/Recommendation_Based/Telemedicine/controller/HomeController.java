@@ -1,19 +1,29 @@
 package com.project.Recommendation_Based.Telemedicine.controller;
+import com.project.Recommendation_Based.Telemedicine.Config.CustomUser;
+import com.project.Recommendation_Based.Telemedicine.entity.Appointment;
+import com.project.Recommendation_Based.Telemedicine.entity.Doctor;
+import com.project.Recommendation_Based.Telemedicine.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import java.security.Principal;
+import java.util.List;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import com.project.Recommendation_Based.Telemedicine.entity.User;
 import com.project.Recommendation_Based.Telemedicine.repository.UserRepo;
 import com.project.Recommendation_Based.Telemedicine.service.PatientService;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class HomeController {
 
     @Autowired
-    private PatientService userService;
+    private UserService userService;
 
     @Autowired
     private UserRepo userRepo;
@@ -28,6 +38,17 @@ public class HomeController {
 
     }
 
+    @GetMapping("/api/user/current")
+    @ResponseBody
+    public ResponseEntity<User> getCurrentUser(Principal principal) {
+        System.out.println(("ConnectedUserEmail----------> "+principal.getName()));
+        String email=principal.getName();
+        User user = userService.getUserProfileByEmail(email);
+        return ResponseEntity.ok(user);
+    }
+
+
+
     @GetMapping("/")
     public String index() { return "index";}
 
@@ -37,8 +58,7 @@ public class HomeController {
     @GetMapping("/signin")
     public String login() { return "login";}
 
-    @GetMapping("/videoCall")
-    public String videoCall() { return "videocall";}
+
 
     @GetMapping("/admin/home")
     public String homeAd(){
