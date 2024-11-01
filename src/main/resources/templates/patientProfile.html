@@ -70,9 +70,9 @@
                         </thead>
                         <tbody>
                         <tr th:each="appointment : ${patient.appointments}">
-                            <td th:text="${appointment.date}">01-02-2023</td>
+                            <td th:text="${appointment.appointmentDate}">01-02-2023</td>
                             <td th:text="${appointment.doctorName}">Dr. Jane Smith</td>
-                            <td th:text="${appointment.status}">Completed</td>
+                            <td th:text="${appointment.paymentStatus}">Completed</td>
                             <td>
                                 <span th:text="${appointment.paymentStatus}">Unpaid</span>
                                 <div th:if="${appointment.paymentStatus} == 'Unpaid'">

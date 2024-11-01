@@ -115,51 +115,17 @@ public class PatientController {
         }
     }
 
-    @GetMapping("/patient/pendingAppointments")
+    @GetMapping("/patientPendingAppointments")
     public String pendingAppointments(Principal principal, Model model) {
 
         String email = principal.getName();
         Patient patient = patientService.getPatientProfile(email);
         int patientId=patient.getId();
-        //System.out.println("Doctor Is: "+doctorId);
+        System.out.println("Patient Id Is: "+patientId);
         List<Appointment> appointments= appointmentService.showPendingAppointments(patientId);
+        System.out.println("Patients pending Appointments-------------->"+ appointments);
         model.addAttribute("appointments", appointments);
         return "patientPendingAppointments";
     }
-//
-//
-//    public String pendingAppointments(Model model){
-//
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//
-//        Object principal = authentication.getPrincipal();
-//        User loggedInUser;
-//        Patient loggedInPatient;
-//
-//        if (principal instanceof CustomUser) {
-//            // If principal is an instance of CustomUser, get the actual User entity
-//            loggedInUser = ((CustomUser) principal).getUser();
-//            loggedInDoctor= doctorRepo.findByEmail(loggedInUser.getEmail());
-//
-//            System.out.println("Yes: Instance");
-//        } else if (principal instanceof String) {
-//            // If principal is a String (email), fetch the user from the database
-//            String email = (String) principal;
-//            loggedInDoctor = doctorRepo.findByEmail(email);
-//            System.out.println("Yes: String " + email);
-//        } else {
-//            System.out.println("None");
-//            // Handle case when neither CustomUser nor String (should not happen)
-//            throw new IllegalStateException("Unexpected authentication principal type");
-//        }
-//        model.addAttribute("doctor", loggedInDoctor.getId());
-//
-//
-//        int doctorId=loggedInDoctor.getId();
-//        //System.out.println("Doctor Is: "+doctorId);
-//        List<Appointment> appointments= appointmentService.showPendingAppointments(doctorId);
-//        model.addAttribute("appointments", appointments);
-//        return "pendingAppointments";
-//    }
 
 }

@@ -38,7 +38,8 @@ public class VideoCallController {
             loggedInDoctor= doctorRepo.findByEmail(loggedInUser.getEmail());
 
             System.out.println("Yes: Instance");
-        } else if (principal instanceof String) {
+        }
+        else if (principal instanceof String) {
             // If principal is a String (email), fetch the user from the database
             String email = (String) principal;
             loggedInDoctor = doctorRepo.findByEmail(email);
@@ -53,7 +54,7 @@ public class VideoCallController {
 
         int doctorId=loggedInDoctor.getId();
         System.out.println("Doctor Is: "+doctorId);
-        List<Appointment> appointments= appointmentService.showPendingAppointments(doctorId);
+        List<Appointment> appointments= appointmentService.showPendingPatients(doctorId);
         model.addAttribute("appointments", appointments);
         return "videocall";
     }

@@ -89,6 +89,16 @@ public class AppointmentServiceImpl implements AppointmentService {
         return appointmentRepo.findUnvisitedAppointmentByPatientId(patientId);
     }
 
+    @Override
+    public String getRoomID(Integer appointmentId) {
+        return appointmentRepo.findRoomIDByAppointmentId(appointmentId);
+    }
+
+    @Override
+    public void saveRoomID(String roomID, Integer appointmentId) {
+        appointmentRepo.upDateRoomIdByAppointmentId(roomID, appointmentId);
+    }
+
 }
 
 

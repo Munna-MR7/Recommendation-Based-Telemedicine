@@ -31,6 +31,7 @@ public class Appointment {
     private String consultationFee;
     private String paymentStatus;
     private String visitStatus;
+    private String roomID;
 
     @ManyToOne
     @JoinColumn(name = "patient_id")

@@ -20,6 +20,12 @@ public interface AppointmentService {
 
     List<Appointment> showPendingAppointments(int patientId);
 
+
+    String getRoomID(Integer appointmentId);
+
+    void saveRoomID(String roomID, Integer appointmentId);
+
+
     //public String setPaymentStatus(String paymentStatus);
 
 }

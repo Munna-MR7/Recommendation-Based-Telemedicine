@@ -27,6 +27,8 @@ import org.springframework.http.ResponseEntity;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.security.Principal;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 
@@ -140,6 +142,26 @@ public class AppointmentController {
     @GetMapping("/payNow")
     public String payNow(){
         return "Payment";
+    }
+
+
+    @PostMapping("/appointments/saveRoomID")
+    public ResponseEntity<?> saveRoomID(@RequestBody Map<String, String> requestData) {
+        String roomID = requestData.get("roomID");
+        int appointmentId = Integer.parseInt(requestData.get("appointmentId"));
+        appointmentService.saveRoomID(roomID, appointmentId);
+        System.out.println("Room ID Saved!");
+        return ResponseEntity.ok("Room ID saved successfully");
+    }
+
+
+    @GetMapping("/appointments/getRoomID/{appointmentId}")
+    public ResponseEntity<Map<String, String>> getRoomID(@PathVariable Integer appointmentId) {
+        // Fetch the room ID for the appointment
+        String roomID = appointmentService.getRoomID(appointmentId);
+        Map<String, String> response = new HashMap<>();
+        response.put("roomID", roomID);
+        return ResponseEntity.ok(response);
     }
 
 //    @PostMapping("/payLater")

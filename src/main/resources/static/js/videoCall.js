@@ -3,7 +3,7 @@ async function fetchCurrentUser() {
         const response = await fetch("/api/user/current");
         if (response.ok) {
             const connectedUser = await response.json();
-            console.log(("ConnectedUser----------> "+connectedUser));
+            console.log("Connected User:", connectedUser);
             return connectedUser;
         } else {
             console.error("Failed to fetch user data.");
@@ -15,31 +15,115 @@ async function fetchCurrentUser() {
     }
 }
 
-async function handleNewMeeting() {
-    const connectedUser = await fetchCurrentUser();
-    console.log("console is:",connectedUser);
-    if (connectedUser) {
-        window.open(`videoCallApi.html?username=${connectedUser.name}`, "_blank");
-    }
-}
+$(document).ready(function() {
+    // Handle creating a new meeting
+    $('#newMeetingBtn').click(async function() {
+        const connectedUser = await fetchCurrentUser(); // Fetch current user information
+        if (connectedUser) {
+            // Get a unique room ID
+            //const roomID = Math.floor(Math.random() * 10000) + "";
+            const appointmentId = $(this).data('id'); // Get appointment ID from button data attribute
 
-async function handleJoinMeeting() {
-    const connectedUser = await fetchCurrentUser();
+            // Redirect to the video call page with appointmentId, roomID, and username as URL params
+            window.open(`videoCallApi.html?appointmentId=${appointmentId}&username=${connectedUser.name}`, "_blank");
+        } else {
+            console.error("No connected user found, cannot create meeting.");
+        }
+    });
 
-    const roomId = document.getElementById("meetingId").value;
-    if (connectedUser) {
-        const url = `videoCallApi.html?roomID=${roomId}&username=${connectedUser.name}`;
-        window.open(url, "_blank");
-    }
-}
+    // Handle joining an existing meeting
+    $('#joinMeetingBtn').click(function() {
+        const appointmentId = $(this).data('id'); // Get appointment ID from button data attribute
+        console.log("Patient Appointment Id---> ",appointmentId);
+        fetchCurrentUser().then(function(connectedUser) {
+            if (connectedUser) {
+                // Fetch the existing room ID associated with the appointment ID
+                $.ajax({
+//                    alert("OKKKKKKKK!!!")
+                    type: "GET",
+                    url: `/appointments/getRoomID/`+appointmentId,
+                    contentType: "application/json",
+                    success: function(response) {
+                        const roomID = response.roomID;
+                        console.log("Patient Room Id is: ",roomID);
+                        if (roomID) {
+                            // Redirect to the video call page with the existing roomID, appointmentId, and username
+                            window.open(`videoCallApi.html?roomID=${roomID}&appointmentId=${appointmentId}&username=${connectedUser.name}`, "_blank");
+                        } else {
+                        alert("You Can not join Now");
+                            console.error("Room ID not found for this appointment.");
+                        }
+                    },
+                    error: function(err) {
+                        console.error("Error fetching Room ID:", err);
+                    }
+                });
+            } else {
+                console.error("No connected user found, cannot join meeting.");
+            }
+        }).catch(function(error) {
+            console.error("Error fetching connected user:", error);
+        });
+    });
+});
 
-// Attach the functions to buttons
-const newMeetingBtn = document.getElementById("newMeetingBtn");
-console.log(newMeetingBtn);
-newMeetingBtn.addEventListener("click", handleNewMeeting);
 
-const joinMeetingBtn = document.getElementById("joinMeetingBtn");
-joinMeetingBtn.addEventListener("click", handleJoinMeeting);
+
+
+
+
+
+
+
+
+
+
+
+
+//async function fetchCurrentUser() {
+//    try {
+//        const response = await fetch("/api/user/current");
+//        if (response.ok) {
+//            const connectedUser = await response.json();
+//            console.log(("ConnectedUser----------> "+connectedUser));
+//            return connectedUser;
+//        } else {
+//            console.error("Failed to fetch user data.");
+//            return null;
+//        }
+//    } catch (error) {
+//        console.error("Error fetching user data:", error);
+//        return null;
+//    }
+//}
+//
+//async function handleNewMeeting() {
+//    const connectedUser = await fetchCurrentUser();
+//    console.log("handleNewMeeting console is:",connectedUser);
+//    if (connectedUser) {
+//        window.open(`videoCallApi.html?username=${connectedUser.name}`, "_blank");
+//    }
+//}
+//function handleJoinMeeting() {
+//    const connectedUser = fetchCurrentUser();
+//    console.log("handleJoinMeeting console is:", connectedUser);
+
+
+
+
+
+
+//}
+
+
+//
+//// Attach the functions to buttons
+//const newMeetingBtn = document.getElementById("newMeetingBtn");
+//console.log(newMeetingBtn);
+//newMeetingBtn.addEventListener("click", handleNewMeeting);
+//
+////const joinMeetingBtn = document.getElementById("joinMeetingBtn");
+//joinMeetingBtn.addEventListener("click", handleJoinMeeting);
 
 
 

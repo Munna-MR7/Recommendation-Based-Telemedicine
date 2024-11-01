@@ -33,15 +33,17 @@
 
                         <!-- Mark Visited button -->
                         <button class="btn btn-info mark-visited-btn" th:data-id="${appointment.id}">Mark Visited</button>
+                        <button id="newMeetingBtn" class="btn btn-danger" th:data-id="${appointment.id}">Create a Consultation Room</button>
+<!--                        <div class="join-meeting">-->
+<!--                            <input type="hidden" id="meetingId"/>-->
+                        <button id="joinMeetingBtn" th:data-id="${appointment.id}">Join</button>
+<!--                        </div>-->
+                    </td>
                 </tr>
                 </tbody>
             </table>
             <div class="new-meeting">
-                <button id="newMeetingBtn" class="btn btn-danger">Create a Consultation Room</button>
-                <div class="join-meeting">
-                    <input type="hidden" id="meetingId"/>
-                    <button id="joinMeetingBtn">Join</button>
-                </div>
+
             </div>
         </div>
 
