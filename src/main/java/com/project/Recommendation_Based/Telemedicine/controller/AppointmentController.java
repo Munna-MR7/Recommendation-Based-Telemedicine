@@ -71,7 +71,7 @@ public class AppointmentController {
     @PostMapping("/makeAppointment")
     public String submitAppointmentForm(@ModelAttribute Appointment appointment, RedirectAttributes ra, Model model,@RequestParam("doctorId") int doctorId ) {
 
-        System.out.println("++++++++++++++++++++++++++>>>>>>>>>>>"+doctorId);
+        //System.out.println("++++++++++++++++++++++++++>>>>>>>>>>>"+doctorId);
         Optional<Doctor> doctorOptional=doctorRepo.findById(doctorId);
         if (doctorOptional.isPresent()) {
         Doctor doc = doctorOptional.get();
@@ -103,6 +103,7 @@ public class AppointmentController {
         // Set the user in the payment entity
         appointment.setPatient(loggedInPatient);
         appointment.setVisitStatus("Unvisited");
+        appointment.setPaymentStatus("Unpaid");
         // After finding the doctor entity
        // Optional<Doctor> doctor = doctorRepo.findById(appointment.getDoctorId());
        //doctor.ifPresent(appointment::setDoctor);

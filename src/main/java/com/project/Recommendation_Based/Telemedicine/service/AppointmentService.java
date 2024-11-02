@@ -25,6 +25,9 @@ public interface AppointmentService {
 
     void saveRoomID(String roomID, Integer appointmentId);
 
+    Appointment findAppointmentById(Integer appointmentId);
+
+
 
     //public String setPaymentStatus(String paymentStatus);
 

@@ -1,6 +1,6 @@
 package com.project.Recommendation_Based.Telemedicine.service;
 
-import com.project.Recommendation_Based.Telemedicine.dto.PaymentRequest;
+import com.project.Recommendation_Based.Telemedicine.entity.Appointment;
 import com.project.Recommendation_Based.Telemedicine.repository.AppointmentRepo;
 import org.cloudinary.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,20 +28,20 @@ public class PaymentServiceImpl implements PaymentService {
     private final String storePassword = "rmedi670acea5f07e5@ssl";
     private final String baseUrl = "https://sandbox.sslcommerz.com/";
 
-    public String initiatePayment(PaymentRequest paymentRequest) throws IOException, InterruptedException {
+    public String initiatePayment(Appointment appointment) throws IOException, InterruptedException {
         // Set up the parameters for payment initiation
         Map<String, String> parameters = new HashMap<>();
         parameters.put("store_id", storeId);
         parameters.put("store_passwd", storePassword);
-        parameters.put("total_amount", String.valueOf(paymentRequest.getAmount()));
+        parameters.put("total_amount", String.valueOf(appointment.getConsultationFee()));
         parameters.put("currency", "BDT");
         parameters.put("tran_id", UUID.randomUUID().toString());  // Unique transaction ID
         parameters.put("success_url", "http://localhost:8080/patient/payment/confirm?status=success");
         parameters.put("fail_url", "http://localhost:8080/patient/payment/confirm?status=failed");
         parameters.put("cancel_url", "http://localhost:8080/patient/payment/confirm?status=canceled");
-        parameters.put("cus_name", paymentRequest.getCustomerName());
-        parameters.put("cus_email", paymentRequest.getCustomerEmail());
-        parameters.put("cus_phone", paymentRequest.getCustomerPhone());
+        parameters.put("cus_name", appointment.getPatientName());
+        parameters.put("cus_email", appointment.getEmail());
+        parameters.put("cus_phone", appointment.getPhoneNumber());
         parameters.put("cus_add1", "Customer Address");  // Add customer address
         parameters.put("cus_city", "Dhaka");  // Add customer city
         parameters.put("cus_country", "Bangladesh");  // Add customer country

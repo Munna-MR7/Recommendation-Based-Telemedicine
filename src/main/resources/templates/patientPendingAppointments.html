@@ -32,6 +32,8 @@
                 <td>
                     <!-- Accept Request button -->
                     <button class="btn btn-success view-appointment-btn" th:data-id="${appointment.id}">View Details</button>
+
+                    <button id="pay-now" th:data-id="${appointment.id}" class="btn btn-success">Pay Now</button>
                     <button id="joinMeetingBtn" class="btn btn-danger" th:data-id="${appointment.id}">Join To Doctor</button>
 
                     <!-- View Details button -->

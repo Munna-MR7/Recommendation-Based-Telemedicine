@@ -99,6 +99,11 @@ public class AppointmentServiceImpl implements AppointmentService {
         appointmentRepo.upDateRoomIdByAppointmentId(roomID, appointmentId);
     }
 
+    @Override
+    public Appointment findAppointmentById(Integer appointmentId) {
+        return appointmentRepo.findById(appointmentId).orElseThrow();
+    }
+
 }
 
 

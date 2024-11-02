@@ -31,8 +31,8 @@
                         <p>Consultation Fee: <strong th:text="${appointment.consultationFee}">[Consultation Fee]</strong></p>
                         <div class="btn-group mt-3" role="group">
 
-                            <button id="pay-now" class="btn btn-success">Pay Now</button>
-                            <button th:action="@{/payLater}" method="POST" type="button" class="btn btn-secondary">Pay Later</button>
+<!--                            <button id="pay-now" th:data-id="${appointment.id}" class="btn btn-success">Pay Now</button>-->
+<!--                            <button th:action="@{/payLater}" method="POST" type="button" class="btn btn-secondary">Pay Later</button>-->
                         </div>
                     </div>
 

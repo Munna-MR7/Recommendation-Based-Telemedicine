@@ -2,12 +2,14 @@ package com.project.Recommendation_Based.Telemedicine.controller;
 
 import com.project.Recommendation_Based.Telemedicine.Config.CustomUser;
 import com.project.Recommendation_Based.Telemedicine.dto.PaymentRequest;
+import com.project.Recommendation_Based.Telemedicine.entity.Appointment;
 import com.project.Recommendation_Based.Telemedicine.entity.Patient;
 import com.project.Recommendation_Based.Telemedicine.entity.Payment;
 import com.project.Recommendation_Based.Telemedicine.entity.User;
 import com.project.Recommendation_Based.Telemedicine.repository.PatientRepo;
 import com.project.Recommendation_Based.Telemedicine.repository.PaymentRepo;
 import com.project.Recommendation_Based.Telemedicine.repository.UserRepo;
+import com.project.Recommendation_Based.Telemedicine.service.AppointmentService;
 import com.project.Recommendation_Based.Telemedicine.service.PaymentService;
 import com.project.Recommendation_Based.Telemedicine.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,12 +44,16 @@ public class PaymentController {
 
     @Autowired
     private PaymentService paymentService;
+    @Autowired
+    private AppointmentService appointmentService;
 
-    @PostMapping("/initiate")
-    public ResponseEntity<Map<String, String>> initiatePayment(@RequestBody PaymentRequest paymentRequest) {
+    @PostMapping("/initiate/{appointmentId}")
+    public ResponseEntity<Map<String, String>> initiatePayment(@PathVariable Integer appointmentId) {
         try {
             // Initiate payment using SSLCommerz
-            String paymentUrl = paymentService.initiatePayment(paymentRequest);
+            System.out.println("Appointment Id for payment---> "+appointmentId);
+            Appointment appointment = appointmentService.findAppointmentById(appointmentId);
+            String paymentUrl = paymentService.initiatePayment(appointment);
 
             // Return the payment URL
             Map<String, String> response = new HashMap<>();
@@ -69,7 +75,6 @@ public class PaymentController {
     private PatientRepo patientRepo;
 
     @PostMapping("/confirm")
-    @ResponseBody
     public String confirmPayment(@RequestParam("status") String status, @RequestParam("tran_id") String transactionId, @RequestParam("amount") String amountSt) {
 
         double amount =Double.parseDouble(amountSt);// Integer.parseInt(amountSt);
@@ -109,7 +114,7 @@ public class PaymentController {
         payment.setPatient(loggedInPatient);
         // Now continue saving the payment, or any other business logic
         paymentRepo.save(payment);
-        return "payment Success";
+        return "paymentSuccess";
 
     }
 }
