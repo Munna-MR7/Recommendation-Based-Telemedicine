@@ -1,5 +1,5 @@
 async function fetchCurrentUser() {
-    try {
+    try {   `` 
         const response = await fetch("/api/user/current");
         if (response.ok) {
             const connectedUser = await response.json();
