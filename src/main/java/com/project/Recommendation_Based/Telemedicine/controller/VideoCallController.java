@@ -56,6 +56,6 @@ public class VideoCallController {
         System.out.println("Doctor Is: "+doctorId);
         List<Appointment> appointments= appointmentService.showPendingPatients(doctorId);
         model.addAttribute("appointments", appointments);
-        return "videocall";
+        return "videoCall";
     }
 }
