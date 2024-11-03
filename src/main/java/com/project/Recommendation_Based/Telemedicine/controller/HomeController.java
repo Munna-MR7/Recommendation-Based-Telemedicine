@@ -1,7 +1,10 @@
 package com.project.Recommendation_Based.Telemedicine.controller;
 import com.project.Recommendation_Based.Telemedicine.Config.CustomUser;
+import com.project.Recommendation_Based.Telemedicine.dto.SurveyDTO;
 import com.project.Recommendation_Based.Telemedicine.entity.Appointment;
 import com.project.Recommendation_Based.Telemedicine.entity.Doctor;
+import com.project.Recommendation_Based.Telemedicine.service.ApiService;
+import com.project.Recommendation_Based.Telemedicine.service.DoctorService;
 import com.project.Recommendation_Based.Telemedicine.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -72,5 +75,21 @@ public class HomeController {
     @GetMapping("/doctorRegisterPage")
     public String doctorRegisterPage(){
         return "doctorRegisterPage";
+    }
+
+    //AI Recommendation
+    @Autowired
+    private ApiService apiService;
+    @Autowired
+    private DoctorService doctorService;
+    @GetMapping("submitSurvey")
+
+    @ResponseBody
+    public String aitest(@ModelAttribute SurveyDTO surveyDTO){
+        List<Doctor> doctors= doctorService.getDoctors();
+        String doctorList= doctors.toString();
+        String prompt = surveyDTO.toString();
+        prompt="Hey google! I'm developing a recommendation-based telemedicine app. here for the testing purpose I need doctor recommendation as close as you can depending on the given symptoms. The symptoms are: "+prompt+ " And here the Doctor list: "+doctorList+ " Now provide the correspondent doctor depending on the symptomps.";
+        return apiService.generateContent(prompt);
     }
 }
