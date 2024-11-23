@@ -27,8 +27,14 @@ public interface AppointmentRepo extends JpaRepository<Appointment, Integer> {
 
     @Modifying
     @Transactional
-    @Query("UPDATE Appointment a SET a.roomID = :roomID WHERE a.id= :appointmentId")
-    void upDateRoomIdByAppointmentId(String roomID, Integer appointmentId);
+    @Query("UPDATE Appointment a SET a.roomID = :roomID WHERE a.doctor.id= :doctorId")
+    void upDateRoomIdByDoctorId(@Param("roomID") String roomID, @Param("doctorId") Integer doctorId);
+
+    @Modifying
+    @Transactional
+    @Query("UPDATE Appointment a SET a.visitStatus='Visited' WHERE a.id=:appointmentId")
+    void patientMarkVisitedByAppointmentId(@Param("appointmentId") Integer appointmentId);
+
 
     //String setPaymentStatus(String paymentStatus);
 }

@@ -1,5 +1,5 @@
 async function fetchCurrentUser() {
-    try {   `` 
+    try {
         const response = await fetch("/api/user/current");
         if (response.ok) {
             const connectedUser = await response.json();
@@ -17,22 +17,22 @@ async function fetchCurrentUser() {
 
 $(document).ready(function() {
     // Handle creating a new meeting
-    $('#newMeetingBtn').click(async function() {
+    $('.newMeeting').click(async function() {
         const connectedUser = await fetchCurrentUser(); // Fetch current user information
         if (connectedUser) {
             // Get a unique room ID
             //const roomID = Math.floor(Math.random() * 10000) + "";
-            const appointmentId = $(this).data('id'); // Get appointment ID from button data attribute
-
+            const doctorId = $(this).data('id'); // Get appointment ID from button data attribute
+            console.log("doctor id from html view---->",doctorId);
             // Redirect to the video call page with appointmentId, roomID, and username as URL params
-            window.open(`videoCallApi.html?appointmentId=${appointmentId}&username=${connectedUser.name}`, "_blank");
+            window.open(`videoCallApi.html?doctorId=${doctorId}&username=${connectedUser.name}`, "_blank");
         } else {
             console.error("No connected user found, cannot create meeting.");
         }
     });
 
     // Handle joining an existing meeting
-    $('#joinMeetingBtn').click(function() {
+    $('.joinMeeting').click(function() {
         const appointmentId = $(this).data('id'); // Get appointment ID from button data attribute
         console.log("Patient Appointment Id---> ",appointmentId);
         fetchCurrentUser().then(function(connectedUser) {

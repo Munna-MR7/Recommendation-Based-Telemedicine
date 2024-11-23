@@ -33,8 +33,8 @@
                     <!-- Accept Request button -->
                     <button class="btn btn-success view-appointment-btn" th:data-id="${appointment.id}">View Details</button>
 
-                    <button id="pay-now" th:data-id="${appointment.id}" class="btn btn-success">Pay Now</button>
-                    <button id="joinMeetingBtn" class="btn btn-danger" th:data-id="${appointment.id}">Join To Doctor</button>
+                    <button id="" th:data-id="${appointment.id}" class="btn btn-success pay-now">Pay Now</button>
+                    <button id="joinMeetingBtn" class="btn btn-danger joinMeeting" th:data-id="${appointment.id}">Join To Doctor</button>
 
                     <!-- View Details button -->
 <!--                    <button class="btn btn-info mark-visited-btn" th:data-id="${appointment.id}">Mark Visited</button>-->
@@ -51,6 +51,8 @@
         </table>
     </div>
 </section>
+<script src="https://unpkg.com/@zegocloud/zego-uikit-prebuilt/zego-uikit-prebuilt.js"></script>
+
 <!--<script src="/js/videoCall.js"></script>-->
 </body>
 </html>

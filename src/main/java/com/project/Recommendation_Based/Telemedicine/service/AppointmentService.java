@@ -23,9 +23,11 @@ public interface AppointmentService {
 
     String getRoomID(Integer appointmentId);
 
-    void saveRoomID(String roomID, Integer appointmentId);
+    void saveRoomID(String roomID, Integer doctorId);
 
     Appointment findAppointmentById(Integer appointmentId);
+
+    void patientMarkVisited(Integer appointmentId);
 
 
 

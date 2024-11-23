@@ -58,8 +58,8 @@
                 <th:block th:if="${user}">
                     <div class="dropdown">
                         <a href="#" class="d-flex align-items-center text-dark text-decoration-none dropdown-toggle pe-3" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="https://github.com/mdo.png" alt="user" width="30" height="30" class="rounded-circle">
-                            <span class="d-none d-sm-inline mx-1">loser</span>
+                            <img th:src="@{/uploads/Munna_profile.jpeg}" alt="user" width="30" height="30" class="rounded-circle">
+                            <span class="d-none d-sm-inline mx-1">Munna</span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
                             <li><a class="dropdown-item" href="#">New project...</a></li>
@@ -109,11 +109,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li>
-                        <a href="#" class="nav-link hover text-dark px-0 align-middle">
-                            <i class="bi bi-table fs-4"></i> <span class="ms-1 d-none d-sm-inline">Orders</span>
-                        </a>
-                    </li>
+
                     <li>
                         <a href="#submenu2" data-bs-toggle="collapse" class="nav-link hover text-dark px-0 align-middle">
                             <i class="bi bi-bootstrap fs-4"></i> <span class="ms-1 d-none d-sm-inline">Appointments</span>
@@ -130,8 +126,13 @@
                         </ul>
                     </li>
                     <li>
+                        <a href="#" class="nav-link hover text-dark px-0 align-middle">
+                            <i class="bi bi-table fs-4"></i> <span class="ms-1 d-none d-sm-inline">Medicine</span>
+                        </a>
+                    </li>
+                    <li>
                         <a href="#submenu3" data-bs-toggle="collapse" class="nav-link text-dark px-0 align-middle">
-                            <i class="bi bi-grid fs-4"></i> <span class="ms-1 d-none d-sm-inline">Products</span>
+                            <i class="bi bi-grid fs-4"></i> <span class="ms-1 d-none d-sm-inline">Health Record</span>
                         </a>
                         <ul class="collapse nav flex-column ms-1" id="submenu3" data-bs-parent="#menu">
                             <li class="w-100">
@@ -144,7 +145,7 @@
                     </li>
                     <li>
                         <a href="#" class="nav-link hover text-dark px-0 align-middle">
-                            <i class="bi bi-people fs-4"></i> <span class="ms-1 d-none d-sm-inline">Customers</span>
+                            <i class="bi bi-people fs-4"></i> <span class="ms-1 d-none d-sm-inline">Prescription</span>
                         </a>
                     </li>
                 </ul>

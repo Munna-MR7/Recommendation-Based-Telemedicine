@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    $('#pay-now').click(function () {
+    $('.pay-now').click(function () {
         // Get appointmentId from the data-id attribute of the clicked button
         var appointmentId = $(this).data('id');
         console.log("appointmentId is ---> ", appointmentId);

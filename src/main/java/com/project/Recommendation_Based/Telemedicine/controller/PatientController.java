@@ -111,7 +111,7 @@ public class PatientController {
         else if (user.getRole().equals("ROLE_ADMIN")) {
             return "adminProfile";
         } else {
-            return "index";
+            return "patientProfile";
         }
     }
 

@@ -49,7 +49,7 @@ public class VideoCallController {
             // Handle case when neither CustomUser nor String (should not happen)
             throw new IllegalStateException("Unexpected authentication principal type");
         }
-        model.addAttribute("doctor", loggedInDoctor.getId());
+        model.addAttribute("doctor", loggedInDoctor);
 
 
         int doctorId=loggedInDoctor.getId();

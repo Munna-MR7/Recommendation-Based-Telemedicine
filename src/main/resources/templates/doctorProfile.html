@@ -8,31 +8,42 @@
 </head>
 <body>
 <section>
-<!--    <div class="col py-3">-->
-<!--        <h3>Left Sidebar with Submenus</h3>-->
-<!--        <p class="lead">-->
-<!--        <h1>Okk! Working.........</h1>-->
-<!--        <ul class="list-unstyled">-->
-<!--            <li><h5>Responsive</h5> shrinks in width, hides text labels, and collapses to icons only on mobile</li>-->
-<!--        </ul>-->
-<!--    </div>-->
-<!--    <button class="btn btn-primary" id="newMeetingBtn">Create Calling Room</button>-->
 
+    <div class="container mt-4">
+        <div class="row">
+            <!-- Profile Section -->
+            <div class="col-md-4 text-center">
+                <!-- Display Profile Picture -->
+                <img th:src="@{/uploads/partho_profile.jpg}" id="profile-pic" alt="Profile Picture" class="img-thumbnail" style="width: 150px; height: 150px;">
+                <h3 th:text="${doctor.name}">John Doe</h3>
 
-    <div id="callContainer">
-        <p>sdjikgh ju1o0-pe4i 0pertujfgoierufgjhoiker eruiftjheruoiftjueroi ro9fui weuiefuo qw39erui0sgi cnfi ldfk gnmbgh 8er57n wkkxcweoi  iweofrj n </p>
-        <video id="localVideo" autoplay muted></video> <!-- Doctor's video -->
-        <video id="remoteVideo" autoplay></video> <!-- Patient's video -->
+                <!-- Upload Profile Picture -->
+                <!--                    <form method="POST" enctype="multipart/form-data" action="/uploadProfilePicture">-->
+                <form  >
+                    <div class="form-group">
+                        <label for="profilePicture">Upload Profile Picture</label>
+                        <input type="file" class="form-control-file" id="profilePicture" name="profilePicture">
+                    </div>
+                    <div>
+                        <button type="submit" class="btn btn-primary">Upload Picture</button>
 
-        <button onclick="mutePatient(patientStreamID)">Mute Patient</button>
-        <button onclick="unmutePatient(patientStreamID)">Unmute Patient</button>
-        <button onclick="rejectPatient(patientStreamID)">Reject Patient</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- User Info Section -->
+            <div class="col-md-8">
+                <h3>User Information</h3>
+                <ul class="list-group mb-4">
+                    <li class="list-group-item"><strong>Email:</strong> <span th:text="${doctor.email}">john.doe@example.com</span></li>
+                    <li class="list-group-item"><strong>Specialization:</strong> <span th:text="${doctor.Specialist}"></span></li>
+                    <li class="list-group-item"><strong>Phone:</strong> <span th:text="${doctor.phone}"></span></li>
+                    <li class="list-group-item"><strong>Address:</strong> <span th:text="${doctor.address}"></span></li>
+                </ul>
+            </div>
+        </div>
     </div>
 
-<!--    <script>-->
-<!--        // Assume the call initialization happens here-->
-<!--        initCall('doctor-room-123', 'doctor123');  // Call doctor-specific room-->
-<!--    </script>-->
 
 </section>
 </body>

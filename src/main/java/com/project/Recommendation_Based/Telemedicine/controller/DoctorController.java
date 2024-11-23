@@ -9,6 +9,7 @@ import com.project.Recommendation_Based.Telemedicine.service.DoctorRequestServic
 import com.project.Recommendation_Based.Telemedicine.service.DoctorService;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpSession;
+import org.apache.http.HttpStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.HttpHeaders;
@@ -129,6 +130,12 @@ public class DoctorController {
         List<Appointment> appointments= appointmentService.showPendingPatients(doctorId);
         model.addAttribute("appointments", appointments);
         return "pendingAppointments";
+    }
+    @PostMapping("/markVisited/{appointmentId}")
+    public ResponseEntity<?> markVisited(@PathVariable("appointmentId") Integer appointmentId){
+        System.out.println("Id fot mark visited is: "+appointmentId);
+        appointmentService.patientMarkVisited(appointmentId);
+        return ResponseEntity.ok("Patient marked visited!");
     }
 
 }

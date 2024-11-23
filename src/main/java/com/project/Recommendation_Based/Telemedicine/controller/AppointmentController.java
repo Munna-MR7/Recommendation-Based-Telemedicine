@@ -149,9 +149,10 @@ public class AppointmentController {
     @PostMapping("/appointments/saveRoomID")
     public ResponseEntity<?> saveRoomID(@RequestBody Map<String, String> requestData) {
         String roomID = requestData.get("roomID");
-        int appointmentId = Integer.parseInt(requestData.get("appointmentId"));
-        appointmentService.saveRoomID(roomID, appointmentId);
-        System.out.println("Room ID Saved!");
+
+        int doctorId = Integer.parseInt(requestData.get("doctorId"));
+        appointmentService.saveRoomID(roomID, doctorId);
+        System.out.println("Room ID Saved---->"+roomID+ " --------For doctor id: "+doctorId);
         return ResponseEntity.ok("Room ID saved successfully");
     }
 
